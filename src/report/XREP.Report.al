@@ -39,7 +39,10 @@ report 50100 XREP
 
                 trigger OnPreDataItem()
                 begin
-                    if NumBlanks >= 2 then
+                    if NumBlanks > 10 then
+                        NumPages += 1;
+
+                    if NumBlanks > 1 then
                         NumBlanks -= 1;
 
                     SetRange(Number, 0, NumBlanks - 1);
@@ -49,7 +52,7 @@ report 50100 XREP
             trigger OnPreDataItem()
             begin
                 PageNo_ := 1;
-                LinesPerPage_ := 10;
+                LinesPerPage_ := 42;
                 NumLines := Lines.Count;
                 NumPages := Round(NumLines / LinesPerPage_, 1, '>');
                 TotalLines := 1;
