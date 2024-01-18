@@ -11,40 +11,6 @@
       <rd:DataSourceID>b310b8c2-e319-4286-9d5a-f29b21348e48</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="LineNo">
-          <DataField>LineNo</DataField>
-        </Field>
-        <Field Name="LinesPerPage_">
-          <DataField>LinesPerPage_</DataField>
-        </Field>
-        <Field Name="NumLines">
-          <DataField>NumLines</DataField>
-        </Field>
-        <Field Name="NumPages">
-          <DataField>NumPages</DataField>
-        </Field>
-        <Field Name="PageNo">
-          <DataField>PageNo</DataField>
-        </Field>
-        <Field Name="BlankLineNo">
-          <DataField>BlankLineNo</DataField>
-        </Field>
-        <Field Name="NumBlanks">
-          <DataField>NumBlanks</DataField>
-        </Field>
-        <Field Name="TotalLines">
-          <DataField>TotalLines</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -343,6 +309,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -459,7 +426,7 @@
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=(Fields!NumLines.Value mod Fields!LinesPerPage_.Value) &gt; (Fields!LinesPerPage_.Value - 1 - Fields!TotalLines.Value)</Hidden>
+                        <Hidden>=(Fields!NumLines.Value mod Fields!LinesPerPage_.Value) &gt; (Fields!LinesPerPage_.Value - 1 - 1)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -498,12 +465,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -543,4 +504,35 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="LineNo">
+          <DataField>LineNo</DataField>
+        </Field>
+        <Field Name="LinesPerPage_">
+          <DataField>LinesPerPage_</DataField>
+        </Field>
+        <Field Name="NumLines">
+          <DataField>NumLines</DataField>
+        </Field>
+        <Field Name="NumPages">
+          <DataField>NumPages</DataField>
+        </Field>
+        <Field Name="PageNo">
+          <DataField>PageNo</DataField>
+        </Field>
+        <Field Name="BlankLineNo">
+          <DataField>BlankLineNo</DataField>
+        </Field>
+        <Field Name="NumBlanks">
+          <DataField>NumBlanks</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

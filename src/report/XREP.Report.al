@@ -35,7 +35,6 @@ report 50100 XREP
             {
                 column(BlankLineNo; Number) { }
                 column(NumBlanks; NumBlanks) { }
-                column(TotalLines; TotalLines) { }
 
                 trigger OnPreDataItem()
                 begin
@@ -55,7 +54,6 @@ report 50100 XREP
                 LinesPerPage_ := 42;
                 NumLines := Lines.Count;
                 NumPages := Round(NumLines / LinesPerPage_, 1, '>');
-                TotalLines := 1;
                 NumBlanks := LinesPerPage_ - (NumLines mod LinesPerPage_);
             end;
         }
