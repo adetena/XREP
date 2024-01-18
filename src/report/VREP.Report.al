@@ -16,8 +16,12 @@ report 50117 VREP
 
             trigger OnPreDataItem()
             begin
-                Lines := 5;
-                Blanks := (Lines mod LinesPerPage) - SummaryLines;
+                Lines := 9;
+                LastPageLines := Lines mod LinesPerPage;
+                Blanks := LinesPerPage - LastPageLines - SummaryLines - FooterLines;
+
+                if LastPageLines > (LinesPerPage - SummaryLines - FooterLines) then
+                    Blanks := 2 * LinesPerPage - LastPageLines - SummaryLines - FooterLines;
             end;
 
 
@@ -52,12 +56,15 @@ report 50117 VREP
     begin
         LinesPerPage := 10;
         SummaryLines := 1;
+        FooterLines := 1;
     end;
 
     var
         // Report
         LinesPerPage: Integer;
+        LastPageLines: Integer;
         SummaryLines: Integer;
+        FooterLines: Integer;
 
         // Item
         Lines: Integer;
