@@ -233,9 +233,6 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>PageNo</rd:DefaultName>
-                          <Visibility>
-                            <Hidden>=Fields!BlankLineNo.Value &lt;&gt; 0</Hidden>
-                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -248,7 +245,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -276,6 +272,26 @@
                                   <Value>:</Value>
                                   <Style />
                                 </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!NumLines.Value</Value>
+                                  <Style />
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style />
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!LineNo.Value</Value>
+                                  <Style />
+                                </TextRun>
+                                <TextRun>
+                                  <Value>:</Value>
+                                  <Style />
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!LinesPerPage_.Value</Value>
+                                  <Style />
+                                </TextRun>
                               </TextRuns>
                               <Style />
                             </Paragraph>
@@ -293,6 +309,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -310,6 +327,10 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Totals: </Value>
+                                  <Style />
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Fields!NumBlanks.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -349,15 +370,7 @@
                                   <Style />
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!PageNo.Value</Value>
-                                  <Style />
-                                </TextRun>
-                                <TextRun>
-                                  <Value>:</Value>
-                                  <Style />
-                                </TextRun>
-                                <TextRun>
-                                  <Value>=Fields!LineNo.Value</Value>
+                                  <Value>=Fields!NumPages.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -408,18 +421,22 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=(Fields!NumBlanks.Value &lt;&gt; 3)</Hidden>
-                      </Visibility>
-                    </TablixMember>
-                    <TablixMember />
-                    <TablixMember>
-                      <Visibility>
-                        <Hidden>=Fields!BlankLineNo.Value &lt;&gt; Fields!NumBlanks.Value</Hidden>
+                        <Hidden>=(Fields!NumBlanks.Value &lt; 4) or (Fields!BlankLineNo.Value &lt;&gt; 0)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Fields!BlankLineNo.Value &lt;&gt; Fields!NumBlanks.Value </Hidden>
+                        <Hidden>=(Fields!NumLines.Value mod Fields!LinesPerPage_.Value) &gt; 3</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Fields!BlankLineNo.Value &lt;&gt; (Fields!NumBlanks.Value - 1)</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Fields!BlankLineNo.Value &lt;&gt; (Fields!NumBlanks.Value - 1)</Hidden>
                       </Visibility>
                     </TablixMember>
                   </TablixMembers>
@@ -493,6 +510,9 @@ End Function
         <Field Name="LineNo">
           <DataField>LineNo</DataField>
         </Field>
+        <Field Name="LinesPerPage_">
+          <DataField>LinesPerPage_</DataField>
+        </Field>
         <Field Name="NumLines">
           <DataField>NumLines</DataField>
         </Field>
@@ -502,14 +522,14 @@ End Function
         <Field Name="PageNo">
           <DataField>PageNo</DataField>
         </Field>
-        <Field Name="LinesPerPage_">
-          <DataField>LinesPerPage_</DataField>
-        </Field>
         <Field Name="BlankLineNo">
           <DataField>BlankLineNo</DataField>
         </Field>
         <Field Name="NumBlanks">
           <DataField>NumBlanks</DataField>
+        </Field>
+        <Field Name="TotalLines">
+          <DataField>TotalLines</DataField>
         </Field>
       </Fields>
       <Query>

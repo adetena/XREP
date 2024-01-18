@@ -14,13 +14,14 @@ report 50100 XREP
             RequestFilterHeading = 'Lines';
 
             column(LineNo; Number) { }
+            column(LinesPerPage_; LinesPerPage_) { }
             column(NumLines; NumLines) { }
             column(NumPages; NumPages) { }
 
             dataitem(Pages; Integer)
             {
                 column(PageNo; Number) { }
-                column(LinesPerPage_; LinesPerPage_) { }
+
 
                 trigger OnPreDataItem()
                 begin
@@ -34,10 +35,14 @@ report 50100 XREP
             {
                 column(BlankLineNo; Number) { }
                 column(NumBlanks; NumBlanks) { }
+                column(TotalLines; TotalLines) { }
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange(Number, 0, NumBlanks);
+                    if NumBlanks >= 2 then
+                        NumBlanks -= 1;
+
+                    SetRange(Number, 0, NumBlanks - 1);
                 end;
             }
 
@@ -48,10 +53,15 @@ report 50100 XREP
                 NumLines := Lines.Count;
                 NumPages := Round(NumLines / LinesPerPage_, 1, '>');
                 TotalLines := 1;
-                NumBlanks := LinesPerPage_ - (NumLines mod LinesPerPage_) - 1 - TotalLines;
+                NumBlanks := LinesPerPage_ - (NumLines mod LinesPerPage_);
             end;
         }
     }
+
+    trigger OnInitReport()
+    begin
+
+    end;
 
     var
         PageNo_: Integer;
