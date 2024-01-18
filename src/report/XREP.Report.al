@@ -49,7 +49,7 @@ report 50100 XREP
             trigger OnPreDataItem()
             begin
                 PageNo_ := 1;
-                LinesPerPage_ := 5;
+                LinesPerPage_ := 10;
                 NumLines := Lines.Count;
                 NumPages := Round(NumLines / LinesPerPage_, 1, '>');
                 TotalLines := 1;

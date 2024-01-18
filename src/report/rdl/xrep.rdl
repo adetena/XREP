@@ -421,12 +421,12 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=(Fields!NumBlanks.Value &lt; 4) or (Fields!BlankLineNo.Value &lt;&gt; 0)</Hidden>
+                        <Hidden>=(Fields!NumBlanks.Value &lt; (Fields!LinesPerPage_.Value - 1)) or (Fields!BlankLineNo.Value &lt;&gt; 0)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=(Fields!NumLines.Value mod Fields!LinesPerPage_.Value) &gt; 3</Hidden>
+                        <Hidden>=(Fields!NumLines.Value mod Fields!LinesPerPage_.Value) &gt; (Fields!LinesPerPage_.Value - 1 - Fields!TotalLines.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
