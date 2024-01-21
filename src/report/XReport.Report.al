@@ -15,7 +15,7 @@ report 50101 "XReport"
 
             trigger OnPreDataItem()
             begin
-                XLines := 10; // Replace with Lines = Count for production;
+                XLines := 10; // Replace with XLines = Count for production;
             end;
 
             // Development trigger
