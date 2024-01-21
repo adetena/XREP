@@ -1,10 +1,10 @@
-report 50117 VREP
+report 50100 XREP
 {
     ApplicationArea = All;
-    Caption = 'VREP';
+    Caption = 'XREP';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = 'src/report/rdl/vrep.rdl';
+    RDLCLayout = 'src/report/rdl/xrep.rdl';
 
     dataset
     {
