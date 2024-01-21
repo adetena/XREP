@@ -10,13 +10,12 @@ report 50101 VREP
         dataitem(Item; Item)
         {
             column(LinesPerPage; LinesPerPage) { }
-            column(Lines; Lines) { }
             column(Line; Line) { }
             column(No_; "No.") { IncludeCaption = true; }
 
             trigger OnPreDataItem()
             begin
-                Lines := 42; // Lines = Count;
+                Lines := 5; // Lines = Count;
             end;
 
             // Remove
@@ -45,16 +44,14 @@ report 50101 VREP
 
     trigger OnInitReport()
     begin
-        // Config
-        LinesPerPage := 42;
+        // VREP
+        LinesPerPage := 5;
     end;
 
     var
-        // Config
+        // VREP
         LinesPerPage: Integer;
         Blanks: Integer;
-
-        // Remove
         Line: Integer;
         Lines: Integer;
 }

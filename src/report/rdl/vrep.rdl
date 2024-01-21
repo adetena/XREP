@@ -11,19 +11,6 @@
       <rd:DataSourceID>2f4f038e-934a-4fd9-b57f-4ae24543089c</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="No_">
-          <DataField>No_</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -108,6 +95,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -245,7 +233,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetHeaderVisibility(Fields!Line.Value, Fields!LinesPerPage.Value)</Hidden>
+                        <Hidden>=Code.SetHeaderVisibility(Fields!LinesPerPage.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -265,7 +253,7 @@
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetFooterVisibility(Fields!Line.Value)</Hidden>
+                        <Hidden>=Code.SetFooterVisibility()</Hidden>
                       </Visibility>
                     </TablixMember>
                   </TablixMembers>
@@ -312,8 +300,15 @@
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
+      <NumberOfColumns>1</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>No_Caption</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
@@ -351,21 +346,21 @@ Public Function BlankNegAndZero(ByVal Value As Decimal)
     Return Value
 End Function
 
-Dim Lines As Integer = 1
+Dim Line As Integer = 0
 Dim LinesPerPage As Integer = 0
 
-Public Function SetHeaderVisibility(ByVal Line, ByVal LinesPerPage)
+Public Function SetHeaderVisibility(ByVal LinesPerPage)
     If Me.LinesPerPage = 0 Then
          Me.LinesPerPage  = LinesPerPage
     End If
 
-    If (Lines Mod Me.LinesPerPage) &lt;&gt; 1 Then
+    If (Line Mod Me.LinesPerPage) &lt;&gt; 0 Then
         Return True
     End If
 End Function
 
 Public Function SetRowVisibility(ByVal Line)
-    Lines += 1
+    Me.Line += 1
 
     Return IsNothing(Line)
 End Function
@@ -378,8 +373,8 @@ Public Function SetTotalsVisibility(ByVal Blank, ByVal Blanks)
     Return IsNothing(Blank) Or (Blank &lt; Blanks)
 End Function
 
-Public Function SetFooterVisibility(ByVal Line)
-    If (Lines Mod Me.Report.Variables("LinesPerPage").Value) &lt;&gt; 1 Then
+Public Function SetFooterVisibility()
+    If (Line Mod LinesPerPage) &lt;&gt; 0 Then
         Return True
     End If
 End Function</Code>
@@ -392,4 +387,29 @@ End Function</Code>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="LinesPerPage">
+          <DataField>LinesPerPage</DataField>
+        </Field>
+        <Field Name="Line">
+          <DataField>Line</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="Blanks">
+          <DataField>Blanks</DataField>
+        </Field>
+        <Field Name="Blank">
+          <DataField>Blank</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
