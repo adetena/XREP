@@ -29,11 +29,11 @@ report 50101 "XReport"
 
             trigger OnPreDataItem()
             begin
-                XLines := 10; // [DEV] replace with XLines = Count for production
+                XLines := 7; // [DEV] replace with XLines = Count for production
             end;
 
-            // [DEV] trigger to control how many rows are generated, remove for
-            // production
+            /* [DEV] trigger to control how many rows are generated, remove for
+            production */
             trigger OnAfterGetRecord()
             begin
                 if XLine = XLines then
@@ -54,8 +54,8 @@ report 50101 "XReport"
                 // [XReport] calcs the number of blank lines to generate
                 XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
 
-                // [XReport] adds XLinesPerPage lines to both blanks and lines counters 
-                // if the number of blank lines is lower than the required by the totals
+                /* [XReport] adds XLinesPerPage lines to both blanks and lines counters 
+                 if the number of blank lines is lower than the required by the totals */
                 if XBlanks < XTotalsLines then begin
                     XBlanks += XLinesPerPage;
                     XLines += XLinesPerPage;
@@ -72,6 +72,7 @@ report 50101 "XReport"
 
             trigger OnPreDataItem()
             begin
+                // [XReport] calcs the number of sidebars to generate
                 SetRange(Number, 1, XLines div XLinesPerPage);
             end;
         }
@@ -79,14 +80,14 @@ report 50101 "XReport"
 
     trigger OnInitReport()
     begin
-        XLinesPerPage := 5; // Lines per page
-        XTotalsLines := 3; // Totals height in lines
+        XLinesPerPage := 5;
+        XTotalsLines := 3;
     end;
 
     var
-        XLinesPerPage: Integer;
-        XLines: Integer;
-        XLine: Integer;
-        XBlanks: Integer;
-        XTotalsLines: Integer;
+        XLinesPerPage: Integer; // [XReport] lines per page
+        XTotalsLines: Integer; // [XReport] totals lines
+        XLines: Integer; // [XReport] lines per page
+        XLine: Integer; // [XReport] counter
+        XBlanks: Integer; // [XReport] counter
 }
