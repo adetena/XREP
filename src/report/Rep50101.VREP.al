@@ -1,0 +1,60 @@
+report 50101 VREP
+{
+    ApplicationArea = All;
+    Caption = 'VREP';
+    UsageCategory = ReportsAndAnalysis;
+    DefaultLayout = RDLC;
+    RDLCLayout = 'src/report/rdl/vrep.rdl';
+    dataset
+    {
+        dataitem(Item; Item)
+        {
+            column(LinesPerPage; LinesPerPage) { }
+            column(Lines; Lines) { }
+            column(Line; Line) { }
+            column(No_; "No.") { IncludeCaption = true; }
+
+            trigger OnPreDataItem()
+            begin
+                Lines := 42; // Lines = Count;
+            end;
+
+            // Remove
+            trigger OnAfterGetRecord()
+            begin
+                if Line = Lines then
+                    CurrReport.Break();
+
+                Line += 1;
+            end;
+        }
+
+        dataitem(Fill; Integer)
+        {
+            column(Blanks; Blanks) { }
+            column(Blank; Number) { }
+
+            trigger OnPreDataItem()
+            begin
+                Blanks := LinesPerPage - (Lines Mod LinesPerPage);
+
+                SetRange(Number, 1, Blanks);
+            end;
+        }
+    }
+
+    trigger OnInitReport()
+    begin
+        // Config
+        LinesPerPage := 42;
+    end;
+
+    var
+        // Config
+        LinesPerPage: Integer;
+        Blanks: Integer;
+
+        // Remove
+        Line: Integer;
+        Lines: Integer;
+}
