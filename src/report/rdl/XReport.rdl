@@ -11,6 +11,34 @@
       <rd:DataSourceID>2f4f038e-934a-4fd9-b57f-4ae24543089c</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="XLinesPerPage">
+          <DataField>XLinesPerPage</DataField>
+        </Field>
+        <Field Name="XLine">
+          <DataField>XLine</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="XBlanks">
+          <DataField>XBlanks</DataField>
+        </Field>
+        <Field Name="XBlank">
+          <DataField>XBlank</DataField>
+        </Field>
+        <Field Name="XSideBar">
+          <DataField>XSideBar</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -138,7 +166,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.75in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -242,7 +270,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value, Fields!XLines.Value)</Hidden>
+                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value, Fields!XLines.Value, Fields!XTotalsLines.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -272,7 +300,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0in</Top>
             <Left>0.25in</Left>
-            <Height>1.25in</Height>
+            <Height>1.75in</Height>
             <Width>7.77in</Width>
             <Style>
               <Border>
@@ -304,7 +332,9 @@
                                   <Style />
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox2</rd:DefaultName>
@@ -314,6 +344,7 @@
                               <Style>None</Style>
                             </Border>
                             <BackgroundColor>Khaki</BackgroundColor>
+                            <VerticalAlign>Middle</VerticalAlign>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -433,8 +464,13 @@ End Function
 Dim LinesPerPage As Integer = 0
 Dim Lines As Integer = 0
 Dim Line As Integer = 0
+Dim TotalsLines As Integer = 0
 
-Public Function SetHeaderVisibility(ByVal LinesPerPage, ByVal Lines)
+Public Function SetHeaderVisibility(ByVal LinesPerPage, ByVal Lines, ByVal TotalsLines)
+    If Me.TotalsLines = 0 Then
+        Me.TotalsLines = TotalsLines
+    End If
+
     If Me.Lines = 0 Then
          Me.Lines  = Lines
     End If
@@ -455,7 +491,7 @@ Public Function SetRowVisibility()
 End Function
 
 Public Function SetBlankVisibility(ByVal Blank, ByVal Blanks)
-    Return IsNothing(Blank) Or (Blank = Blanks)
+    Return IsNothing(Blank) Or (Blank = Blanks) Or ((Blanks - Blank) &lt; TotalsLines)
 End Function
 
 Public Function SetTotalsVisibility(ByVal Blank, ByVal Blanks)
@@ -471,35 +507,4 @@ End Function</Code>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="XLinesPerPage">
-          <DataField>XLinesPerPage</DataField>
-        </Field>
-        <Field Name="XLines">
-          <DataField>XLines</DataField>
-        </Field>
-        <Field Name="XLine">
-          <DataField>XLine</DataField>
-        </Field>
-        <Field Name="No_">
-          <DataField>No_</DataField>
-        </Field>
-        <Field Name="XBlanks">
-          <DataField>XBlanks</DataField>
-        </Field>
-        <Field Name="XBlank">
-          <DataField>XBlank</DataField>
-        </Field>
-        <Field Name="XSideBar">
-          <DataField>XSideBar</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

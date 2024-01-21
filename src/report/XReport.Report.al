@@ -17,7 +17,7 @@ report 50101 "XReport"
 
             trigger OnPreDataItem()
             begin
-                XLines := 15; // Replace with XLines = Count for production;
+                XLines := 8; // Replace with XLines = Count for production;
             end;
 
             // Development trigger to control how many rows are generated
@@ -34,10 +34,16 @@ report 50101 "XReport"
         {
             column(XBlanks; XBlanks) { }
             column(XBlank; Number) { }
+            column(XTotalsLines; XTotalsLines) { }
 
             trigger OnPreDataItem()
             begin
                 XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
+
+                if XBlanks < XTotalsLines then begin
+                    XBlanks += 5;
+                    XLines += 5;
+                end;
 
                 SetRange(Number, 1, XBlanks);
             end;
@@ -57,6 +63,7 @@ report 50101 "XReport"
     trigger OnInitReport()
     begin
         XLinesPerPage := 5;
+        XTotalsLines := 3;
     end;
 
     var
@@ -64,4 +71,5 @@ report 50101 "XReport"
         XLines: Integer;
         XLine: Integer;
         XBlanks: Integer;
+        XTotalsLines: Integer;
 }
