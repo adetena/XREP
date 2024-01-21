@@ -10,13 +10,13 @@ report 50117 VREP
     {
         dataitem(Item; Item)
         {
+            column(LinesPerPage; LinesPerPage) { }
             column(Lines; Lines) { }
             column(Line; Line) { }
             column(No; "No.") { IncludeCaption = true; }
 
             trigger OnPreDataItem()
             begin
-                Lines := 9;
                 LastPageLines := Lines mod LinesPerPage;
                 Blanks := LinesPerPage - LastPageLines - SummaryLines - FooterLines;
 
@@ -54,9 +54,13 @@ report 50117 VREP
 
     trigger OnInitReport()
     begin
-        LinesPerPage := 10;
+        // Report
         SummaryLines := 1;
         FooterLines := 1;
+
+        // Item
+        LinesPerPage := 10;
+        Lines := 72;
     end;
 
     var
