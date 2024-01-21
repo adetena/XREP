@@ -15,7 +15,7 @@ report 50101 "XReport"
 
             trigger OnPreDataItem()
             begin
-                Lines := 5; // Lines = Count;
+                Lines := 10; // Lines = Count;
             end;
 
             // Remove
@@ -38,6 +38,16 @@ report 50101 "XReport"
                 Blanks := LinesPerPage - (Lines Mod LinesPerPage);
 
                 SetRange(Number, 1, Blanks);
+            end;
+        }
+
+        dataitem(Side; Integer)
+        {
+            column(Page; Number) { }
+
+            trigger OnPreDataItem()
+            begin
+                SetRange(Number, 1, Lines div LinesPerPage);
             end;
         }
     }
