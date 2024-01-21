@@ -111,7 +111,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Blank.Value</Value>
+                                  <Value>=Fields!XBlank.Value</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>#333333</Color>
@@ -226,12 +226,12 @@
                   <Group Name="Details">
                     <GroupExpressions>
                       <GroupExpression>=Fields!No_.Value</GroupExpression>
-                      <GroupExpression>=Fields!Blank.Value</GroupExpression>
-                      <GroupExpression>=Fields!Page.Value</GroupExpression>
+                      <GroupExpression>=Fields!XBlank.Value</GroupExpression>
+                      <GroupExpression>=Fields!XSideBar.Value</GroupExpression>
                     </GroupExpressions>
                     <Filters>
                       <Filter>
-                        <FilterExpression>=IsNothing(Fields!Page.Value)</FilterExpression>
+                        <FilterExpression>=IsNothing(Fields!XSideBar.Value)</FilterExpression>
                         <Operator>Equal</Operator>
                         <FilterValues>
                           <FilterValue DataType="Boolean">true</FilterValue>
@@ -242,22 +242,22 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetHeaderVisibility(Fields!LinesPerPage.Value)</Hidden>
+                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetRowVisibility(Fields!Line.Value)</Hidden>
+                        <Hidden>=Code.SetRowVisibility(Fields!XLine.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetBlankVisibility(Fields!Blank.Value, Fields!Blanks.Value)</Hidden>
+                        <Hidden>=Code.SetBlankVisibility(Fields!XBlank.Value, Fields!XBlanks.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetTotalsVisibility(Fields!Blank.Value, Fields!Blanks.Value)</Hidden>
+                        <Hidden>=Code.SetTotalsVisibility(Fields!XBlank.Value, Fields!XBlanks.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -321,7 +321,6 @@
                             <WritingMode>Rotate270</WritingMode>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -338,7 +337,7 @@
                 <TablixMember>
                   <Group Name="Details1">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!Page.Value</GroupExpression>
+                      <GroupExpression>=Fields!XSideBar.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                 </TablixMember>
@@ -475,23 +474,23 @@ End Function</Code>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="LinesPerPage">
-          <DataField>LinesPerPage</DataField>
+        <Field Name="XLinesPerPage">
+          <DataField>XLinesPerPage</DataField>
         </Field>
-        <Field Name="Line">
-          <DataField>Line</DataField>
+        <Field Name="XLine">
+          <DataField>XLine</DataField>
         </Field>
         <Field Name="No_">
           <DataField>No_</DataField>
         </Field>
-        <Field Name="Blanks">
-          <DataField>Blanks</DataField>
+        <Field Name="XBlanks">
+          <DataField>XBlanks</DataField>
         </Field>
-        <Field Name="Blank">
-          <DataField>Blank</DataField>
+        <Field Name="XBlank">
+          <DataField>XBlank</DataField>
         </Field>
-        <Field Name="Page">
-          <DataField>Page</DataField>
+        <Field Name="XSideBar">
+          <DataField>XSideBar</DataField>
         </Field>
       </Fields>
       <Query>

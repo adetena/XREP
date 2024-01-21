@@ -9,45 +9,46 @@ report 50101 "XReport"
     {
         dataitem(Item; Item)
         {
-            column(LinesPerPage; LinesPerPage) { }
-            column(Line; Line) { }
+            column(XLinesPerPage; XLinesPerPage) { }
+            column(XLine; XLine) { }
             column(No_; "No.") { IncludeCaption = true; }
 
             trigger OnPreDataItem()
             begin
-                Lines := 10; // Lines = Count;
+                XLines := 10; // Replace with Lines = Count for production;
             end;
 
-            // Remove
+            // Development trigger
+            // Controls how many rows are generated
             trigger OnAfterGetRecord()
             begin
-                if Line = Lines then
+                if XLine = XLines then
                     CurrReport.Break();
 
-                Line += 1;
+                XLine += 1;
             end;
         }
 
-        dataitem(Fill; Integer)
+        dataitem(XAuxLines; Integer)
         {
-            column(Blanks; Blanks) { }
-            column(Blank; Number) { }
+            column(XBlanks; XBlanks) { }
+            column(XBlank; Number) { }
 
             trigger OnPreDataItem()
             begin
-                Blanks := LinesPerPage - (Lines Mod LinesPerPage);
+                XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
 
-                SetRange(Number, 1, Blanks);
+                SetRange(Number, 1, XBlanks);
             end;
         }
 
-        dataitem(Side; Integer)
+        dataitem(XSideBars; Integer)
         {
-            column(Page; Number) { }
+            column(XSideBar; Number) { }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, Lines div LinesPerPage);
+                SetRange(Number, 1, XLines div XLinesPerPage);
             end;
         }
     }
@@ -55,13 +56,13 @@ report 50101 "XReport"
     trigger OnInitReport()
     begin
         // VREP
-        LinesPerPage := 5;
+        XLinesPerPage := 5;
     end;
 
     var
         // VREP
-        LinesPerPage: Integer;
-        Blanks: Integer;
-        Line: Integer;
-        Lines: Integer;
+        XLinesPerPage: Integer;
+        XBlanks: Integer;
+        XLine: Integer;
+        XLines: Integer;
 }
