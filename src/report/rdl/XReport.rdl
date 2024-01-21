@@ -199,6 +199,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -270,7 +271,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value, Fields!XLines.Value, Fields!XTotalsLines.Value)</Hidden>
+                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value, Fields!XLines.Value, Fields!XBlanks.Value, Fields!XTotalsLines.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -280,12 +281,12 @@
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetBlankVisibility(Fields!XBlank.Value, Fields!XBlanks.Value)</Hidden>
+                        <Hidden>=Code.SetBlankVisibility(Fields!XBlank.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetTotalsVisibility(Fields!XBlank.Value, Fields!XBlanks.Value)</Hidden>
+                        <Hidden>=Code.SetTotalsVisibility(Fields!XBlank.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -461,45 +462,50 @@ Public Function BlankNegAndZero(ByVal Value As Decimal)
     Return Value
 End Function
 
-Dim LinesPerPage As Integer = 0
-Dim Lines As Integer = 0
-Dim Line As Integer = 0
-Dim TotalsLines As Integer = 0
+Dim XLinesPerPage As Integer = 0
+Dim XLines As Integer = 0
+Dim XLine As Integer = 0
+Dim XBlanks As Integer = 0
+Dim XTotalsLines As Integer = 0
 
-Public Function SetHeaderVisibility(ByVal LinesPerPage, ByVal Lines, ByVal TotalsLines)
-    If Me.TotalsLines = 0 Then
-        Me.TotalsLines = TotalsLines
+Public Function SetHeaderVisibility(ByVal LinesPerPage, ByVal Lines, ByVal Blanks, ByVal TotalsLines)
+    If XBlanks = 0 Then
+            XBlanks = Blanks
     End If
 
-    If Me.Lines = 0 Then
-         Me.Lines  = Lines
+    If XTotalsLines = 0 Then
+        XTotalsLines = TotalsLines
     End If
 
-    If Me.LinesPerPage = 0 Then
-         Me.LinesPerPage  = LinesPerPage
+    If XLines = 0 Then
+         XLines  = Lines
     End If
 
-    Line += 1
+    If XLinesPerPage = 0 Then
+         XLinesPerPage  = LinesPerPage
+    End If
 
-    If (Line Mod Me.LinesPerPage) &lt;&gt; 1 Then
+    XLine += 1
+
+    If (XLine Mod XLinesPerPage) &lt;&gt; 1 Then
         Return True
     End If
 End Function
 
 Public Function SetRowVisibility()
-    Return Line &gt; Lines
+    Return XLine &gt; XLines
 End Function
 
-Public Function SetBlankVisibility(ByVal Blank, ByVal Blanks)
-    Return IsNothing(Blank) Or (Blank = Blanks) Or ((Blanks - Blank) &lt; TotalsLines)
+Public Function SetBlankVisibility(ByVal Blank)
+    Return IsNothing(Blank) Or (Blank = XBlanks) Or ((XBlanks - Blank) &lt; XTotalsLines)
 End Function
 
-Public Function SetTotalsVisibility(ByVal Blank, ByVal Blanks)
-    Return IsNothing(Blank) Or (Blank &lt; Blanks)
+Public Function SetTotalsVisibility(ByVal Blank)
+    Return IsNothing(Blank) Or (Blank &lt; XBlanks)
 End Function
 
 Public Function SetFooterVisibility()
-    If (Line Mod LinesPerPage) &lt;&gt; 0 Then
+    If (XLine Mod XLinesPerPage) &lt;&gt; 0 Then
         Return True
     End If
 End Function</Code>

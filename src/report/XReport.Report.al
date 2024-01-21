@@ -41,8 +41,8 @@ report 50101 "XReport"
                 XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
 
                 if XBlanks < XTotalsLines then begin
-                    XBlanks += 5;
-                    XLines += 5;
+                    XBlanks += XLinesPerPage;
+                    XLines += XLinesPerPage;
                 end;
 
                 SetRange(Number, 1, XBlanks);
