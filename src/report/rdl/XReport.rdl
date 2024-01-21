@@ -579,9 +579,6 @@ End Function</Code>
         <Field Name="XLines">
           <DataField>XLines</DataField>
         </Field>
-        <Field Name="XLine">
-          <DataField>XLine</DataField>
-        </Field>
         <Field Name="No_">
           <DataField>No_</DataField>
         </Field>

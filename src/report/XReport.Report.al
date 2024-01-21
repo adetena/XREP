@@ -12,21 +12,12 @@ report 50101 "XReport"
         {
             column(XLinesPerPage; XLinesPerPage) { }
             column(XLines; XLines) { }
-            column(XLine; XLine) { }
 
             column(No_; "No.") { IncludeCaption = true; }
 
             trigger OnPreDataItem()
             begin
-                XLines := 7;
-            end;
-
-            trigger OnAfterGetRecord()
-            begin
-                if XLine = XLines then
-                    CurrReport.Break();
-
-                XLine += 1;
+                XLines := Item.Count;
             end;
         }
 
