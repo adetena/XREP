@@ -10,16 +10,17 @@ report 50101 "XReport"
         dataitem(Item; Item)
         {
             column(XLinesPerPage; XLinesPerPage) { }
+            column(XLines; XLines) { }
             column(XLine; XLine) { }
+
             column(No_; "No.") { IncludeCaption = true; }
 
             trigger OnPreDataItem()
             begin
-                XLines := 10; // Replace with XLines = Count for production;
+                XLines := 15; // Replace with XLines = Count for production;
             end;
 
-            // Development trigger
-            // Controls how many rows are generated
+            // Development trigger to control how many rows are generated
             trigger OnAfterGetRecord()
             begin
                 if XLine = XLines then
@@ -55,14 +56,12 @@ report 50101 "XReport"
 
     trigger OnInitReport()
     begin
-        // VREP
         XLinesPerPage := 5;
     end;
 
     var
-        // VREP
         XLinesPerPage: Integer;
-        XBlanks: Integer;
-        XLine: Integer;
         XLines: Integer;
+        XLine: Integer;
+        XBlanks: Integer;
 }

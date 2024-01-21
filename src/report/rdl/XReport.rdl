@@ -242,12 +242,12 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value)</Hidden>
+                        <Hidden>=Code.SetHeaderVisibility(Fields!XLinesPerPage.Value, Fields!XLines.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.SetRowVisibility(Fields!XLine.Value)</Hidden>
+                        <Hidden>=Code.SetRowVisibility()</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -311,7 +311,7 @@
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
-                              <Style>Solid</Style>
+                              <Style>None</Style>
                             </Border>
                             <BackgroundColor>Khaki</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
@@ -430,23 +430,28 @@ Public Function BlankNegAndZero(ByVal Value As Decimal)
     Return Value
 End Function
 
-Dim Line As Integer = 0
 Dim LinesPerPage As Integer = 0
+Dim Lines As Integer = 0
+Dim Line As Integer = 0
 
-Public Function SetHeaderVisibility(ByVal LinesPerPage)
+Public Function SetHeaderVisibility(ByVal LinesPerPage, ByVal Lines)
+    If Me.Lines = 0 Then
+         Me.Lines  = Lines
+    End If
+
     If Me.LinesPerPage = 0 Then
          Me.LinesPerPage  = LinesPerPage
     End If
 
-    If (Line Mod Me.LinesPerPage) &lt;&gt; 0 Then
+    Line += 1
+
+    If (Line Mod Me.LinesPerPage) &lt;&gt; 1 Then
         Return True
     End If
 End Function
 
-Public Function SetRowVisibility(ByVal Line)
-    Me.Line += 1
-
-    Return IsNothing(Line)
+Public Function SetRowVisibility()
+    Return Line &gt; Lines
 End Function
 
 Public Function SetBlankVisibility(ByVal Blank, ByVal Blanks)
@@ -463,11 +468,6 @@ Public Function SetFooterVisibility()
     End If
 End Function</Code>
   <Language>=User!Language</Language>
-  <Variables>
-    <Variable Name="LinesPerPage">
-      <Value>42</Value>
-    </Variable>
-  </Variables>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
@@ -476,6 +476,9 @@ End Function</Code>
       <Fields>
         <Field Name="XLinesPerPage">
           <DataField>XLinesPerPage</DataField>
+        </Field>
+        <Field Name="XLines">
+          <DataField>XLines</DataField>
         </Field>
         <Field Name="XLine">
           <DataField>XLine</DataField>
