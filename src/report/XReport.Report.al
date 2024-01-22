@@ -21,6 +21,8 @@ report 50101 "XReport"
     {
         dataitem(Integer; Integer)
         {
+            column(XPage; XPage) { }
+
             dataitem(Item; Item)
             {
                 column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
@@ -32,17 +34,20 @@ report 50101 "XReport"
 
                 trigger OnPreDataItem()
                 begin
-                    XLines := 6; // [DEV] replace with XLines = Count for production
+                    XLines := 5; // [DEV] replace with XLines = Count for production
                 end;
 
-                /* [DEV] trigger to control how many rows are generated, remove for
-                production */
+                /* [XReport] update page number */
                 trigger OnAfterGetRecord()
                 begin
+                    // [DEV] control how many rows are generated, remove for production
                     if XLine = XLines then
                         CurrReport.Break();
 
                     XLine += 1;
+
+                    if XLine mod XLinesPerPage = 0 then
+                        XPage += 1;
                 end;
             }
 
@@ -57,7 +62,7 @@ report 50101 "XReport"
                     XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
 
                     /* [XReport] adds XLinesPerPage lines to both blanks and lines counters 
-                     if the number of blank lines is lower than the required by the totals */
+                    if the number of blank lines is lower than the required by the totals */
                     if XBlanks < XTotalsLines then begin
                         XBlanks += XLinesPerPage;
                         XLines += XLinesPerPage;
@@ -66,11 +71,16 @@ report 50101 "XReport"
                     // [XReport] filters the dataitem to the required length
                     SetRange(Number, 1, XBlanks);
                 end;
+
+                trigger OnAfterGetRecord()
+                begin
+                    XLine += 1; // [XReport] update line counter
+                end;
             }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1);
+                SetRange(Number, 1); // [DEV] main dataitem range
             end;
         }
 
@@ -90,12 +100,14 @@ report 50101 "XReport"
     begin
         XLinesPerPage := 5;
         XTotalsLines := 3;
+        XPage := 1; // [XReport] initial page number
     end;
 
     var
         XLinesPerPage: Integer; // [XReport] lines per page
         XTotalsLines: Integer; // [XReport] totals lines
+        XBlanks: Integer; // [XReport] counter
         XLines: Integer; // [XReport] lines per page
         XLine: Integer; // [XReport] counter
-        XBlanks: Integer; // [XReport] counter
+        XPage: Integer; // [XReport] counter
 }
