@@ -30,7 +30,7 @@ report 50101 "XReport"
                 begin
                     XLine += 1;
 
-                    if XLine mod XLinesPerPage = 0 then
+                    if XLine mod XLinesPerPage = 1 then
                         XPage += 1;
                 end;
             }
@@ -77,9 +77,8 @@ report 50101 "XReport"
 
     trigger OnInitReport()
     begin
-        XLinesPerPage := 5;
+        XLinesPerPage := 40;
         XTotalsLines := 3;
-        XPage := 1;
     end;
 
     var
