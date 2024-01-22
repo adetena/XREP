@@ -576,6 +576,9 @@ End Function</Code>
         <Field Name="XLinesPerPage">
           <DataField>XLinesPerPage</DataField>
         </Field>
+        <Field Name="XTotalsLines">
+          <DataField>XTotalsLines</DataField>
+        </Field>
         <Field Name="XLines">
           <DataField>XLines</DataField>
         </Field>
@@ -590,9 +593,6 @@ End Function</Code>
         </Field>
         <Field Name="XBlank">
           <DataField>XBlank</DataField>
-        </Field>
-        <Field Name="XTotalsLines">
-          <DataField>XTotalsLines</DataField>
         </Field>
         <Field Name="XSideBar">
           <DataField>XSideBar</DataField>

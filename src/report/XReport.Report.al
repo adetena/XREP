@@ -19,50 +19,58 @@ report 50101 "XReport"
 
     dataset
     {
-        dataitem(Item; Item)
+        dataitem(Integer; Integer)
         {
-            column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
-            column(XLines; XLines) { } // [XReport] number of data lines
-            column(XLine; XLine) { } // [DEV] counter, remove for production
+            dataitem(Item; Item)
+            {
+                column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
+                column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
+                column(XLines; XLines) { } // [XReport] number of data lines
+                column(XLine; XLine) { } // [DEV] counter, remove for production
 
-            column(No_; "No.") { IncludeCaption = true; }
+                column(No_; "No.") { IncludeCaption = true; }
 
-            trigger OnPreDataItem()
-            begin
-                XLines := 7; // [DEV] replace with XLines = Count for production
-            end;
-
-            /* [DEV] trigger to control how many rows are generated, remove for
-            production */
-            trigger OnAfterGetRecord()
-            begin
-                if XLine = XLines then
-                    CurrReport.Break();
-
-                XLine += 1;
-            end;
-        }
-
-        dataitem(XAuxLines; Integer)
-        {
-            column(XBlanks; XBlanks) { } // [XReport] number of blank lines
-            column(XBlank; Number) { } // [XReport] blank line number
-            column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
-
-            trigger OnPreDataItem()
-            begin
-                // [XReport] calcs the number of blank lines to generate
-                XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
-
-                /* [XReport] adds XLinesPerPage lines to both blanks and lines counters 
-                 if the number of blank lines is lower than the required by the totals */
-                if XBlanks < XTotalsLines then begin
-                    XBlanks += XLinesPerPage;
-                    XLines += XLinesPerPage;
+                trigger OnPreDataItem()
+                begin
+                    XLines := 6; // [DEV] replace with XLines = Count for production
                 end;
 
-                // [XReport] filters the dataitem to the required length
-                SetRange(Number, 1, XBlanks);
+                /* [DEV] trigger to control how many rows are generated, remove for
+                production */
+                trigger OnAfterGetRecord()
+                begin
+                    if XLine = XLines then
+                        CurrReport.Break();
+
+                    XLine += 1;
+                end;
+            }
+
+            dataitem(XAuxLines; Integer)
+            {
+                column(XBlanks; XBlanks) { } // [XReport] number of blank lines
+                column(XBlank; Number) { } // [XReport] blank line number
+
+                trigger OnPreDataItem()
+                begin
+                    // [XReport] calcs the number of blank lines to generate
+                    XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
+
+                    /* [XReport] adds XLinesPerPage lines to both blanks and lines counters 
+                     if the number of blank lines is lower than the required by the totals */
+                    if XBlanks < XTotalsLines then begin
+                        XBlanks += XLinesPerPage;
+                        XLines += XLinesPerPage;
+                    end;
+
+                    // [XReport] filters the dataitem to the required length
+                    SetRange(Number, 1, XBlanks);
+                end;
+            }
+
+            trigger OnPreDataItem()
+            begin
+                SetRange(Number, 1);
             end;
         }
 
