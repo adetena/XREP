@@ -34,19 +34,17 @@ report 50101 "XReport"
 
                 trigger OnPreDataItem()
                 begin
-                    XLines := 5; // [DEV] replace with XLines = Count for production
+                    SetRange("No.", '1000', '1200'); // [DEV] main dataitem range
+
+                    XLines := Count; // [DEV] replace with XLines = Count for production
                 end;
 
                 /* [XReport] update page number */
                 trigger OnAfterGetRecord()
                 begin
-                    // [DEV] control how many rows are generated, remove for production
-                    if XLine = XLines then
-                        CurrReport.Break();
-
                     XLine += 1;
 
-                    if XLine mod XLinesPerPage = 0 then
+                    if XLine mod XLinesPerPage = 1 then
                         XPage += 1;
                 end;
             }
@@ -100,7 +98,6 @@ report 50101 "XReport"
     begin
         XLinesPerPage := 5;
         XTotalsLines := 3;
-        XPage := 1; // [XReport] initial page number
     end;
 
     var
