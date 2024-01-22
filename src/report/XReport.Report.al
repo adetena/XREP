@@ -8,26 +8,30 @@ report 50101 "XReport"
 
     dataset
     {
-        dataitem("Sales Header"; "Sales Header")
+        dataitem(Integer; Integer)
         {
-            RequestFilterFields = "No.", "Sell-to Customer No.";
+            column(XPage; XPage) { }
 
-            column(XLinesPerPage; XLinesPerPage) { }
-            column(XTotalsLines; XTotalsLines) { }
-            column(XLines; XLines) { }
-
-            column(No; "No.") { IncludeCaption = true; }
-
-            dataitem("Sales Invoice Line"; "Sales Line")
+            dataitem(Item; Item)
             {
-                DataItemLinkReference = "Sales Header";
-                DataItemLink = "Document No." = field("No."), "Bill-to Customer No." = field("Bill-to Customer No.");
-                DataItemTableView = sorting("Document No.", "Line No.", "Bill-to Customer No.");
+                column(XLinesPerPage; XLinesPerPage) { }
+                column(XTotalsLines; XTotalsLines) { }
+                column(XLines; XLines) { }
+                column(XLine; XLine) { }
 
-                column(No_; "No.") { }
+                column(No_; "No.") { IncludeCaption = true; }
+
                 trigger OnPreDataItem()
                 begin
-                    XLines := "Sales Invoice Line".Count;
+                    XLines := Count;
+                end;
+
+                trigger OnAfterGetRecord()
+                begin
+                    XLine += 1;
+
+                    if XLine mod XLinesPerPage = 0 then
+                        XPage += 1;
                 end;
             }
 
@@ -47,7 +51,17 @@ report 50101 "XReport"
 
                     SetRange(Number, 1, XBlanks);
                 end;
+
+                trigger OnAfterGetRecord()
+                begin
+                    XLine += 1;
+                end;
             }
+
+            trigger OnPreDataItem()
+            begin
+                SetRange(Number, 1);
+            end;
         }
 
         dataitem(XSideBars; Integer)
@@ -65,13 +79,14 @@ report 50101 "XReport"
     begin
         XLinesPerPage := 5;
         XTotalsLines := 3;
+        XPage := 1;
     end;
 
     var
-        XPage: Integer;
         XLinesPerPage: Integer;
         XTotalsLines: Integer;
+        XBlanks: Integer;
         XLines: Integer;
         XLine: Integer;
-        XBlanks: Integer;
+        XPage: Integer;
 }
