@@ -35,7 +35,7 @@ report 50101 "XReport"
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange("No.", '1000', '1200'); // [DEV] main dataitem range
+                    SetRange("No.", '1000', '1199'); // [DEV] main dataitem range
 
                     XLines := Count; // [DEV] replace with XLines = Count for production
                     XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>'); // [XReport] calcs number of pages
@@ -75,6 +75,9 @@ report 50101 "XReport"
                 trigger OnAfterGetRecord()
                 begin
                     XLine += 1; // [XReport] update line counter
+
+                    if XLine mod XLinesPerPage = 1 then
+                        XPage += 1;
                 end;
             }
 
