@@ -21,15 +21,16 @@ report 50101 "XReport"
     {
         dataitem(Integer; Integer)
         {
-            column(XPage; XPage) { }
+
+            column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
+            column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
+            column(XLines; XLines) { } // [XReport] number of data lines
+            column(XPages; XPages) { } // [XReport] number of pages
+            column(XLine; XLine) { } // [XReport] counter
+            column(XPage; XPage) { } // [XReport] counter
 
             dataitem(Item; Item)
             {
-                column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
-                column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
-                column(XLines; XLines) { } // [XReport] number of data lines
-                column(XLine; XLine) { } // [DEV] counter, remove for production
-
                 column(No_; "No.") { IncludeCaption = true; }
 
                 trigger OnPreDataItem()
@@ -37,6 +38,7 @@ report 50101 "XReport"
                     SetRange("No.", '1000', '1200'); // [DEV] main dataitem range
 
                     XLines := Count; // [DEV] replace with XLines = Count for production
+                    XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>'); // [XReport] calcs number of pages
                 end;
 
                 /* [XReport] update page number */
@@ -103,8 +105,9 @@ report 50101 "XReport"
     var
         XLinesPerPage: Integer; // [XReport] lines per page
         XTotalsLines: Integer; // [XReport] totals lines
-        XBlanks: Integer; // [XReport] counter
+        XBlanks: Integer; // [XReport] number of blanks
         XLines: Integer; // [XReport] lines per page
+        XPages: Integer; // [XReport] number of pages
         XLine: Integer; // [XReport] counter
         XPage: Integer; // [XReport] counter
 }
