@@ -10,15 +10,15 @@ report 50101 "XReport"
     {
         dataitem(Integer; Integer)
         {
+            column(XLinesPerPage; XLinesPerPage) { }
+            column(XTotalsLines; XTotalsLines) { }
+            column(XLines; XLines) { }
+            column(XPages; XPages) { }
+            column(XLine; XLine) { }
             column(XPage; XPage) { }
 
             dataitem(Item; Item)
             {
-                column(XLinesPerPage; XLinesPerPage) { }
-                column(XTotalsLines; XTotalsLines) { }
-                column(XLines; XLines) { }
-                column(XLine; XLine) { }
-
                 column(No_; "No.") { IncludeCaption = true; }
 
                 trigger OnPreDataItem()
@@ -86,6 +86,7 @@ report 50101 "XReport"
         XTotalsLines: Integer;
         XBlanks: Integer;
         XLines: Integer;
+        XPages: Integer;
         XLine: Integer;
         XPage: Integer;
 }
