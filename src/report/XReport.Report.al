@@ -56,6 +56,9 @@ report 50101 "XReport"
                 trigger OnAfterGetRecord()
                 begin
                     XLine += 1;
+
+                    if XLine mod XLinesPerPage = 1 then
+                        XPage += 1;
                 end;
             }
 
