@@ -24,7 +24,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.5in</Height>
+                  <Height>0.69in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -42,7 +42,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPage.Value</Value>
+                                  <Value>=Code.GetPageNo()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -56,7 +56,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPages.Value</Value>
+                                  <Value>=Code.GetNumPages()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -224,7 +224,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPage.Value</Value>
+                                  <Value>=Code.GetPageNo()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -238,7 +238,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPages.Value</Value>
+                                  <Value>=Code.GetNumPages()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -268,7 +268,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>2.25in</Height>
+                  <Height>11.19in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -304,7 +304,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -366,7 +365,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0in</Top>
             <Left>0.25in</Left>
-            <Height>4.5in</Height>
+            <Height>13.63in</Height>
             <Width>7.77in</Width>
             <Style>
               <Border>
@@ -383,7 +382,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>2.25in</Height>
+                  <Height>11.19in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -445,7 +444,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Top>0in</Top>
             <Left>0in</Left>
-            <Height>2.25in</Height>
+            <Height>11.19in</Height>
             <Width>0.25in</Width>
             <ZIndex>1</ZIndex>
             <Style>
@@ -575,6 +574,14 @@ Public Function SetFooterVisibility()
     If (XLine Mod XLinesPerPage) &lt;&gt; 0 Then
         Return True
     End If
+End Function
+
+Function GetPageNo()
+   Return Ceiling(XLine / XLinesPerPage)
+End Function
+
+Function GetNumPages()
+    Return Ceiling((XLines + XTotalsLines) / XLinesPerPage)
 End Function</Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
@@ -594,12 +601,6 @@ End Function</Code>
         </Field>
         <Field Name="XPages">
           <DataField>XPages</DataField>
-        </Field>
-        <Field Name="XLine">
-          <DataField>XLine</DataField>
-        </Field>
-        <Field Name="XPage">
-          <DataField>XPage</DataField>
         </Field>
         <Field Name="No_">
           <DataField>No_</DataField>

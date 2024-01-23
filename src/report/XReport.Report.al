@@ -26,8 +26,6 @@ report 50101 "XReport"
             column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
             column(XLines; XLines) { } // [XReport] number of data lines
             column(XPages; XPages) { } // [XReport] number of pages
-            column(XLine; XLine) { } // [XReport] counter
-            column(XPage; XPage) { } // [XReport] counter
 
             dataitem(Item; Item)
             {
@@ -35,20 +33,11 @@ report 50101 "XReport"
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange("No.", '1000', '1199'); // [DEV] main dataitem range
-
                     XLines := Count; // [DEV] replace with XLines = Count for production
                     XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>'); // [XReport] calcs number of pages
                 end;
 
                 /* [XReport] update page number */
-                trigger OnAfterGetRecord()
-                begin
-                    XLine += 1;
-
-                    if XLine mod XLinesPerPage = 1 then
-                        XPage += 1;
-                end;
             }
 
             dataitem(XAuxLines; Integer)
@@ -70,14 +59,6 @@ report 50101 "XReport"
 
                     // [XReport] filters the dataitem to the required length
                     SetRange(Number, 1, XBlanks);
-                end;
-
-                trigger OnAfterGetRecord()
-                begin
-                    XLine += 1; // [XReport] update line counter
-
-                    if XLine mod XLinesPerPage = 1 then
-                        XPage += 1;
                 end;
             }
 
@@ -101,7 +82,7 @@ report 50101 "XReport"
 
     trigger OnInitReport()
     begin
-        XLinesPerPage := 5;
+        XLinesPerPage := 40;
         XTotalsLines := 3;
     end;
 
@@ -111,6 +92,4 @@ report 50101 "XReport"
         XBlanks: Integer; // [XReport] number of blanks
         XLines: Integer; // [XReport] lines per page
         XPages: Integer; // [XReport] number of pages
-        XLine: Integer; // [XReport] counter
-        XPage: Integer; // [XReport] counter
 }
