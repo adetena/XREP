@@ -14,25 +14,17 @@ report 50101 "XReport"
             column(XTotalsLines; XTotalsLines) { }
             column(XLines; XLines) { }
             column(XPages; XPages) { }
-            column(XLine; XLine) { }
-            column(XPage; XPage) { }
 
             dataitem(Item; Item)
             {
+                // DataItemTableView = where("No." = filter('1000..2199'));
+
                 column(No_; "No.") { IncludeCaption = true; }
 
                 trigger OnPreDataItem()
                 begin
                     XLines := Count;
                     XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>');
-                end;
-
-                trigger OnAfterGetRecord()
-                begin
-                    XLine += 1;
-
-                    if XLine mod XLinesPerPage = 1 then
-                        XPage += 1;
                 end;
             }
 
@@ -51,14 +43,6 @@ report 50101 "XReport"
                     end;
 
                     SetRange(Number, 1, XBlanks);
-                end;
-
-                trigger OnAfterGetRecord()
-                begin
-                    XLine += 1;
-
-                    if XLine mod XLinesPerPage = 1 then
-                        XPage += 1;
                 end;
             }
 
@@ -91,6 +75,4 @@ report 50101 "XReport"
         XBlanks: Integer;
         XLines: Integer;
         XPages: Integer;
-        XLine: Integer;
-        XPage: Integer;
 }

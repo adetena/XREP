@@ -42,7 +42,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPage.Value</Value>
+                                  <Value>=Code.GetPageNo()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -56,7 +56,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPages.Value</Value>
+                                  <Value>=Code.GetNumPages()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -224,7 +224,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPage.Value</Value>
+                                  <Value>=Code.GetPageNo()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -238,7 +238,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Value>=Fields!XPages.Value</Value>
+                                  <Value>=Code.GetNumPages()</Value>
                                   <Style>
                                     <FontWeight>Normal</FontWeight>
                                     <Color>Gray</Color>
@@ -574,6 +574,14 @@ Public Function SetFooterVisibility()
     If (XLine Mod XLinesPerPage) &lt;&gt; 0 Then
         Return True
     End If
+End Function
+
+Function GetPageNo()
+   Return Ceiling(XLine / XLinesPerPage)
+End Function
+
+Function GetNumPages()
+    Return Ceiling((XLines + XTotalsLines) / XLinesPerPage)
 End Function</Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
@@ -593,12 +601,6 @@ End Function</Code>
         </Field>
         <Field Name="XPages">
           <DataField>XPages</DataField>
-        </Field>
-        <Field Name="XLine">
-          <DataField>XLine</DataField>
-        </Field>
-        <Field Name="XPage">
-          <DataField>XPage</DataField>
         </Field>
         <Field Name="No_">
           <DataField>No_</DataField>
