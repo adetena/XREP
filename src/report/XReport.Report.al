@@ -22,7 +22,7 @@ report 50101 "XReport"
         dataitem(Integer; Integer)
         {
 
-            column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
+            column(XLinesPerPage; XLinesPerPage) { } // [XReport] lines per page
             column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
             column(XLines; XLines) { } // [XReport] number of data lines
 
@@ -34,8 +34,6 @@ report 50101 "XReport"
                 begin
                     XLines := Count; // [DEV] replace with XLines = Count for production
                 end;
-
-                /* [XReport] update page number */
             }
 
             dataitem(XAuxLines; Integer)
