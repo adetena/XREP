@@ -13,7 +13,6 @@ report 50101 "XReport"
             column(XLinesPerPage; XLinesPerPage) { }
             column(XTotalsLines; XTotalsLines) { }
             column(XLines; XLines) { }
-            column(XPages; XPages) { }
 
             dataitem(Item; Item)
             {
@@ -24,7 +23,6 @@ report 50101 "XReport"
                 trigger OnPreDataItem()
                 begin
                     XLines := Count;
-                    XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>');
                 end;
             }
 
@@ -74,5 +72,4 @@ report 50101 "XReport"
         XTotalsLines: Integer;
         XBlanks: Integer;
         XLines: Integer;
-        XPages: Integer;
 }
