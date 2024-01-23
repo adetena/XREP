@@ -25,7 +25,6 @@ report 50101 "XReport"
             column(XLinesPerPage; XLinesPerPage) { } // [XReport] Lines per page
             column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
             column(XLines; XLines) { } // [XReport] number of data lines
-            column(XPages; XPages) { } // [XReport] number of pages
 
             dataitem(Item; Item)
             {
@@ -34,7 +33,6 @@ report 50101 "XReport"
                 trigger OnPreDataItem()
                 begin
                     XLines := Count; // [DEV] replace with XLines = Count for production
-                    XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>'); // [XReport] calcs number of pages
                 end;
 
                 /* [XReport] update page number */
@@ -91,5 +89,4 @@ report 50101 "XReport"
         XTotalsLines: Integer; // [XReport] totals lines
         XBlanks: Integer; // [XReport] number of blanks
         XLines: Integer; // [XReport] lines per page
-        XPages: Integer; // [XReport] number of pages
 }

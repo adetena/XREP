@@ -599,9 +599,6 @@ End Function</Code>
         <Field Name="XLines">
           <DataField>XLines</DataField>
         </Field>
-        <Field Name="XPages">
-          <DataField>XPages</DataField>
-        </Field>
         <Field Name="No_">
           <DataField>No_</DataField>
         </Field>
