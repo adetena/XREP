@@ -24,6 +24,7 @@ report 50101 "XReport"
                 trigger OnPreDataItem()
                 begin
                     XLines := Count;
+                    XPages := Round((XLines + XTotalsLines) / XLinesPerPage, 1, '>');
                 end;
 
                 trigger OnAfterGetRecord()
