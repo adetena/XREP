@@ -11,37 +11,6 @@
       <rd:DataSourceID>2f4f038e-934a-4fd9-b57f-4ae24543089c</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="XLinesPerPage">
-          <DataField>XLinesPerPage</DataField>
-        </Field>
-        <Field Name="XTotalsLines">
-          <DataField>XTotalsLines</DataField>
-        </Field>
-        <Field Name="XLines">
-          <DataField>XLines</DataField>
-        </Field>
-        <Field Name="No_">
-          <DataField>No_</DataField>
-        </Field>
-        <Field Name="XBlanks">
-          <DataField>XBlanks</DataField>
-        </Field>
-        <Field Name="XBlank">
-          <DataField>XBlank</DataField>
-        </Field>
-        <Field Name="XSideBar">
-          <DataField>XSideBar</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -501,12 +470,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -601,4 +564,35 @@ End Function</Code>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="XLinesPerPage">
+          <DataField>XLinesPerPage</DataField>
+        </Field>
+        <Field Name="XTotalsLines">
+          <DataField>XTotalsLines</DataField>
+        </Field>
+        <Field Name="XLines">
+          <DataField>XLines</DataField>
+        </Field>
+        <Field Name="No_">
+          <DataField>No_</DataField>
+        </Field>
+        <Field Name="XBlanks">
+          <DataField>XBlanks</DataField>
+        </Field>
+        <Field Name="XBlank">
+          <DataField>XBlank</DataField>
+        </Field>
+        <Field Name="XSideBar">
+          <DataField>XSideBar</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

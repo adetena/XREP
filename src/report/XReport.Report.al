@@ -60,11 +60,19 @@ report 50101 "XReport"
         XTotalsLines := 3;
     end;
 
+    /// <summary>
+    /// Gets the spare number of lines
+    /// </summary>
+    /// <returns>The number of lines</returns>
     local procedure GetLines(): Integer
     begin
         exit(XLines mod XLinesPerPage);
     end;
 
+    /// <summary>
+    /// Gets the number of pages
+    /// </summary>
+    /// <returns></returns>
     local procedure GetPages(): Integer
     begin
         exit(XLines div XLinesPerPage);
