@@ -18,7 +18,7 @@ report 50101 "XReport"
 
             dataitem(Child; Integer) // Table may be replaced with the required one
             {
-                DataItemTableView = where(Number = filter('1..34')); // Replace or remove for production.
+                DataItemTableView = where(Number = filter('1..38')); // Replace or remove for production.
 
                 column(No_; Number) { }
 
@@ -89,6 +89,17 @@ report 50101 "XReport"
     end;
 
     /// <summary>
+    /// Checks whether blank lines are enough to display totals, adding extra lines if not
+    /// </summary>
+    local procedure TestBlanks()
+    begin
+        if XBlanks < XTotalsLines then begin
+            XBlanks += XLinesPerPage;
+            XLines += XLinesPerPage;
+        end;
+    end;
+
+    /// <summary>
     /// Gets the required number of blank lines to fill the remaining space
     /// </summary>
     /// <returns>The number of blank lines</returns>
@@ -97,11 +108,7 @@ report 50101 "XReport"
         XBlanks := XLinesPerPage - GetLines;
 
         TestRange(XBlanks);
-
-        if XBlanks < XTotalsLines then begin
-            XBlanks += XLinesPerPage;
-            XLines += XLinesPerPage;
-        end;
+        TestBlanks;
 
         exit(XBlanks);
     end;
