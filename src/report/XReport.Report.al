@@ -8,17 +8,32 @@ report 50101 "XReport"
 
     dataset
     {
-        dataitem(Integer; Integer)
+        dataitem(Parent; Integer)
         {
             column(XLinesPerPage; XLinesPerPage) { }
             column(XTotalsLines; XTotalsLines) { }
             column(XLines; XLines) { }
 
-            dataitem(Item; Item)
+            dataitem(Child; Integer)
             {
-                // DataItemTableView = where("No." = filter('1000..2199'));
+                // DataItemTableView = where(Number = filter('1..1'));
+                // DataItemTableView = where(Number = filter('1..2'));
+                // DataItemTableView = where(Number = filter('1..3'));
+                // DataItemTableView = where(Number = filter('1..5'));
+                // DataItemTableView = where(Number = filter('1..8'));
+                // DataItemTableView = where(Number = filter('1..13'));
+                // DataItemTableView = where(Number = filter('1..21'));
+                // DataItemTableView = where(Number = filter('1..34'));
 
-                column(No_; "No.") { IncludeCaption = true; }
+                // DataItemTableView = where(Number = filter('1..37'));
+                DataItemTableView = where(Number = filter('1..38'));
+                // DataItemTableView = where(Number = filter('1..39'));
+                // DataItemTableView = where(Number = filter('1..40'));
+
+                // DataItemTableView = where(Number = filter('1..55'));
+                // DataItemTableView = where(Number = filter('1..89'));
+
+                column(No_; Number) { }
 
                 trigger OnPreDataItem()
                 begin
@@ -26,21 +41,14 @@ report 50101 "XReport"
                 end;
             }
 
-            dataitem(XAuxLines; Integer)
+            dataitem(XBlankLines; Integer)
             {
                 column(XBlanks; XBlanks) { }
                 column(XBlank; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
-
-                    if XBlanks < XTotalsLines then begin
-                        XBlanks += XLinesPerPage;
-                        XLines += XLinesPerPage;
-                    end;
-
-                    SetRange(Number, 1, XBlanks);
+                    SetRange(Number, 1, GetBlanks);
                 end;
             }
 
@@ -55,8 +63,10 @@ report 50101 "XReport"
             column(XSideBar; Number) { }
 
             trigger OnPreDataItem()
+            var
+                Bars: Integer;
             begin
-                SetRange(Number, 1, XLines div XLinesPerPage);
+                SetRange(Number, 1, GetSideBars);
             end;
         }
     }
@@ -64,7 +74,37 @@ report 50101 "XReport"
     trigger OnInitReport()
     begin
         XLinesPerPage := 40;
-        XTotalsLines := 3;
+        XTotalsLines := 0;
+    end;
+
+    local procedure TestRange(Range: Integer)
+    begin
+        if (Range = XLinesPerPage) and (XTotalsLines = 0) then
+            CurrReport.Break();
+    end;
+
+    local procedure GetBlanks(): Integer
+    var
+        Range: Integer;
+    begin
+        Range := XLinesPerPage - (XLines Mod XLinesPerPage);
+
+        TestRange(Range);
+
+        if Range < XTotalsLines then begin
+            Range += XLinesPerPage;
+        end;
+
+        XBlanks := Range;
+
+        exit(XBlanks);
+    end;
+
+    local procedure GetSideBars(): Integer
+    begin
+        TestRange(XLines);
+
+        exit(XLines div XLinesPerPage);
     end;
 
     var
