@@ -26,9 +26,9 @@ report 50101 "XReport"
                 // DataItemTableView = where(Number = filter('1..34'));
 
                 // DataItemTableView = where(Number = filter('1..37'));
-                DataItemTableView = where(Number = filter('1..38'));
+                // DataItemTableView = where(Number = filter('1..38'));
                 // DataItemTableView = where(Number = filter('1..39'));
-                // DataItemTableView = where(Number = filter('1..40'));
+                DataItemTableView = where(Number = filter('1..40'));
 
                 // DataItemTableView = where(Number = filter('1..55'));
                 // DataItemTableView = where(Number = filter('1..89'));
@@ -63,8 +63,6 @@ report 50101 "XReport"
             column(XSideBar; Number) { }
 
             trigger OnPreDataItem()
-            var
-                Bars: Integer;
             begin
                 SetRange(Number, 1, GetSideBars);
             end;
@@ -93,6 +91,7 @@ report 50101 "XReport"
 
         if Range < XTotalsLines then begin
             Range += XLinesPerPage;
+            XLines += XLinesPerPage;
         end;
 
         XBlanks := Range;
