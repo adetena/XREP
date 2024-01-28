@@ -1,14 +1,3 @@
-/// <summary>
-/// XReport is an advanced ready-to-use report prototype capable of generating customized
-/// layouts with headers, footers, fill lines, totals and side bars automatically, based on
-/// the specified XLinesPerPage and XTotalsLines specified values.
-/// 
-/// For the layout to work properly, data lines must have a standard height (E.G.: 0.25in),
-/// and every other element, like footer or totals, must have a height equal to n times the
-/// default line height, where n is an integer number.
-/// 
-/// Side bar height may also be adjusted in the layout to fill the height of a single group.
-/// </summary>
 report 50101 "XReport"
 {
     ApplicationArea = All;
@@ -19,48 +8,53 @@ report 50101 "XReport"
 
     dataset
     {
-        dataitem(Integer; Integer)
+        dataitem(Parent; Integer)
         {
+            column(XLinesPerPage; XLinesPerPage) { }
+            column(XTotalsLines; XTotalsLines) { }
+            column(XLines; XLines) { }
 
-            column(XLinesPerPage; XLinesPerPage) { } // [XReport] lines per page
-            column(XTotalsLines; XTotalsLines) { } // [XReport] totals lines number
-            column(XLines; XLines) { } // [XReport] number of data lines
-
-            dataitem(Item; Item)
+            dataitem(Child; Integer)
             {
-                column(No_; "No.") { IncludeCaption = true; }
+                // DataItemTableView = where(Number = filter('1..1'));
+                // DataItemTableView = where(Number = filter('1..2'));
+                // DataItemTableView = where(Number = filter('1..3'));
+                // DataItemTableView = where(Number = filter('1..5'));
+                // DataItemTableView = where(Number = filter('1..8'));
+                // DataItemTableView = where(Number = filter('1..13'));
+                // DataItemTableView = where(Number = filter('1..21'));
+                DataItemTableView = where(Number = filter('1..34'));
+
+                // DataItemTableView = where(Number = filter('1..37'));
+                // DataItemTableView = where(Number = filter('1..38'));
+                // DataItemTableView = where(Number = filter('1..39'));
+                // DataItemTableView = where(Number = filter('1..40'));
+
+                // DataItemTableView = where(Number = filter('1..55'));
+                // DataItemTableView = where(Number = filter('1..89'));
+
+                column(No_; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    XLines := Count; // [DEV] replace with XLines = Count for production
+                    XLines := Count;
                 end;
             }
 
-            dataitem(XAuxLines; Integer)
+            dataitem(XBlankLines; Integer)
             {
-                column(XBlanks; XBlanks) { } // [XReport] number of blank lines
-                column(XBlank; Number) { } // [XReport] blank line number
+                column(XBlanks; XBlanks) { }
+                column(XBlank; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    // [XReport] calcs the number of blank lines to generate
-                    XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
-
-                    /* [XReport] adds XLinesPerPage lines to both blanks and lines counters 
-                    if the number of blank lines is lower than the required by the totals */
-                    if XBlanks < XTotalsLines then begin
-                        XBlanks += XLinesPerPage;
-                        XLines += XLinesPerPage;
-                    end;
-
-                    // [XReport] filters the dataitem to the required length
-                    SetRange(Number, 1, XBlanks);
+                    SetRange(Number, 1, GetBlanks);
                 end;
             }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1); // [DEV] main dataitem range
+                SetRange(Number, 1);
             end;
         }
 
@@ -70,8 +64,7 @@ report 50101 "XReport"
 
             trigger OnPreDataItem()
             begin
-                // [XReport] calcs the number of sidebars to generate
-                SetRange(Number, 1, XLines div XLinesPerPage);
+                SetRange(Number, 1, GetSideBars);
             end;
         }
     }
@@ -82,9 +75,36 @@ report 50101 "XReport"
         XTotalsLines := 3;
     end;
 
+    local procedure TestRange(Range: Integer)
+    begin
+        if (Range = XLinesPerPage) and (XTotalsLines = 0) then
+            CurrReport.Break();
+    end;
+
+    local procedure GetBlanks(): Integer
+    begin
+        XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
+
+        TestRange(XBlanks);
+
+        if XBlanks < XTotalsLines then begin
+            XBlanks += XLinesPerPage;
+            XLines += XLinesPerPage;
+        end;
+
+        exit(XBlanks);
+    end;
+
+    local procedure GetSideBars(): Integer
+    begin
+        TestRange(XLines);
+
+        exit(XLines div XLinesPerPage);
+    end;
+
     var
-        XLinesPerPage: Integer; // [XReport] lines per page
-        XTotalsLines: Integer; // [XReport] totals lines
-        XBlanks: Integer; // [XReport] number of blanks
-        XLines: Integer; // [XReport] lines per page
+        XLinesPerPage: Integer;
+        XTotalsLines: Integer;
+        XBlanks: Integer;
+        XLines: Integer;
 }

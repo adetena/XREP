@@ -469,30 +469,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParameters>
-    <ReportParameter Name="No_Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>No_Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>No_Caption</Prompt>
-    </ReportParameter>
-  </ReportParameters>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>1</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>No_Caption</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -563,11 +539,11 @@ Public Function SetRowVisibility()
 End Function
 
 Public Function SetBlankVisibility(ByVal Blank)
-    Return IsNothing(Blank) Or (Blank = XBlanks) Or ((XBlanks - Blank) &lt; XTotalsLines)
+    Return IsNothing(Blank) Or ((XBlanks - Blank) &lt; XTotalsLines)
 End Function
 
 Public Function SetTotalsVisibility(ByVal Blank)
-    Return IsNothing(Blank) Or (Blank &lt; XBlanks)
+    Return IsNothing(Blank) Or (Blank &lt; XBlanks) Or (XTotalsLines = 0)
 End Function
 
 Public Function SetFooterVisibility()
