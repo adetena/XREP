@@ -405,6 +405,9 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                          </Visibility>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -419,6 +422,7 @@
                             <WritingMode>Rotate270</WritingMode>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
