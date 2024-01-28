@@ -18,7 +18,7 @@ report 50101 "XReport"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter('1..34'));
+                DataItemTableView = where(Number = filter('1..40'));
 
                 column(No_; Number) { }
 
@@ -73,16 +73,20 @@ report 50101 "XReport"
             CurrReport.Break;
     end;
 
+    local procedure TestBlanks()
+    begin
+        if XBlanks < XTotalsLines then begin
+            XBlanks += XLinesPerPage;
+            XLines += XLinesPerPage;
+        end;
+    end;
+
     local procedure GetBlanks(): Integer
     begin
         XBlanks := XLinesPerPage - GetLines;
 
         TestRange(XBlanks);
-
-        if XBlanks < XTotalsLines then begin
-            XBlanks += XLinesPerPage;
-            XLines += XLinesPerPage;
-        end;
+        TestBlanks;
 
         exit(XBlanks);
     end;
