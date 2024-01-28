@@ -60,6 +60,16 @@ report 50101 "XReport"
         XTotalsLines := 3;
     end;
 
+    local procedure GetLines(): Integer
+    begin
+        exit(XLines mod XLinesPerPage);
+    end;
+
+    local procedure GetPages(): Integer
+    begin
+        exit(XLines div XLinesPerPage);
+    end;
+
     /// <summary>
     /// Tests the given range to check if blank lines are required
     /// </summary>
@@ -67,7 +77,7 @@ report 50101 "XReport"
     local procedure TestRange(Range: Integer)
     begin
         if (Range = XLinesPerPage) and (XTotalsLines = 0) then
-            CurrReport.Break();
+            CurrReport.Break;
     end;
 
     /// <summary>
@@ -76,7 +86,7 @@ report 50101 "XReport"
     /// <returns>The number of blank lines</returns>
     local procedure GetBlanks(): Integer
     begin
-        XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
+        XBlanks := XLinesPerPage - GetLines;
 
         TestRange(XBlanks);
 
@@ -96,7 +106,7 @@ report 50101 "XReport"
     begin
         TestRange(XLines);
 
-        exit(XLines div XLinesPerPage);
+        exit(GetPages);
     end;
 
     var
