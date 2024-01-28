@@ -10,28 +10,15 @@ report 50101 "XReport"
     {
         dataitem(Parent; Integer)
         {
+            DataItemTableView = where(Number = const(1));
+
             column(XLinesPerPage; XLinesPerPage) { }
             column(XTotalsLines; XTotalsLines) { }
             column(XLines; XLines) { }
 
             dataitem(Child; Integer)
             {
-                // DataItemTableView = where(Number = filter('1..1'));
-                // DataItemTableView = where(Number = filter('1..2'));
-                // DataItemTableView = where(Number = filter('1..3'));
-                // DataItemTableView = where(Number = filter('1..5'));
-                // DataItemTableView = where(Number = filter('1..8'));
-                // DataItemTableView = where(Number = filter('1..13'));
-                // DataItemTableView = where(Number = filter('1..21'));
                 DataItemTableView = where(Number = filter('1..34'));
-
-                // DataItemTableView = where(Number = filter('1..37'));
-                // DataItemTableView = where(Number = filter('1..38'));
-                // DataItemTableView = where(Number = filter('1..39'));
-                // DataItemTableView = where(Number = filter('1..40'));
-
-                // DataItemTableView = where(Number = filter('1..55'));
-                // DataItemTableView = where(Number = filter('1..89'));
 
                 column(No_; Number) { }
 
@@ -51,11 +38,6 @@ report 50101 "XReport"
                     SetRange(Number, 1, GetBlanks);
                 end;
             }
-
-            trigger OnPreDataItem()
-            begin
-                SetRange(Number, 1);
-            end;
         }
 
         dataitem(XSideBars; Integer)
@@ -75,15 +57,25 @@ report 50101 "XReport"
         XTotalsLines := 3;
     end;
 
+    local procedure GetLines(): Integer
+    begin
+        exit(XLines mod XLinesPerPage);
+    end;
+
+    local procedure GetPages(): Integer
+    begin
+        exit(XLines div XLinesPerPage);
+    end;
+
     local procedure TestRange(Range: Integer)
     begin
         if (Range = XLinesPerPage) and (XTotalsLines = 0) then
-            CurrReport.Break();
+            CurrReport.Break;
     end;
 
     local procedure GetBlanks(): Integer
     begin
-        XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
+        XBlanks := XLinesPerPage - GetLines;
 
         TestRange(XBlanks);
 
@@ -99,7 +91,7 @@ report 50101 "XReport"
     begin
         TestRange(XLines);
 
-        exit(XLines div XLinesPerPage);
+        exit(GetPages);
     end;
 
     var
