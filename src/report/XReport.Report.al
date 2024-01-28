@@ -23,12 +23,12 @@ report 50101 "XReport"
                 // DataItemTableView = where(Number = filter('1..8'));
                 // DataItemTableView = where(Number = filter('1..13'));
                 // DataItemTableView = where(Number = filter('1..21'));
-                // DataItemTableView = where(Number = filter('1..34'));
+                DataItemTableView = where(Number = filter('1..34'));
 
                 // DataItemTableView = where(Number = filter('1..37'));
                 // DataItemTableView = where(Number = filter('1..38'));
                 // DataItemTableView = where(Number = filter('1..39'));
-                DataItemTableView = where(Number = filter('1..40'));
+                // DataItemTableView = where(Number = filter('1..40'));
 
                 // DataItemTableView = where(Number = filter('1..55'));
                 // DataItemTableView = where(Number = filter('1..89'));
@@ -72,7 +72,7 @@ report 50101 "XReport"
     trigger OnInitReport()
     begin
         XLinesPerPage := 40;
-        XTotalsLines := 0;
+        XTotalsLines := 3;
     end;
 
     local procedure TestRange(Range: Integer)
@@ -82,19 +82,15 @@ report 50101 "XReport"
     end;
 
     local procedure GetBlanks(): Integer
-    var
-        Range: Integer;
     begin
-        Range := XLinesPerPage - (XLines Mod XLinesPerPage);
+        XBlanks := XLinesPerPage - (XLines Mod XLinesPerPage);
 
-        TestRange(Range);
+        TestRange(XBlanks);
 
-        if Range < XTotalsLines then begin
-            Range += XLinesPerPage;
+        if XBlanks < XTotalsLines then begin
+            XBlanks += XLinesPerPage;
             XLines += XLinesPerPage;
         end;
-
-        XBlanks := Range;
 
         exit(XBlanks);
     end;
