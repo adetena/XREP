@@ -16,7 +16,7 @@ report 50102 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter('1..38'));
+                DataItemTableView = where(Number = filter(1 .. 30));
 
                 column(ChildNo; Number) { }
             }
@@ -27,32 +27,32 @@ report 50102 "XReport2"
 
                 trigger OnPreDataItem()
                 begin
-                    if GetBlankLines = 0 then CurrReport.Break();
+                    if GetBlankLines = 0 then CurrReport.Break;
                     if GetBlankLines > 0 then SetRange(Number, 1, GetBlankLines);
                 end;
             }
 
             dataitem(SubTotal; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. -1));
+                DataItemTableView = where(Number = filter(1 .. 2));
 
                 column(SubTotalNo; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    if Count = 0 then CurrReport.Break();
+                    if Count = 0 then CurrReport.Break;
                 end;
             }
 
             dataitem(Total; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. -1));
+                DataItemTableView = where(Number = filter(1 .. 4));
 
                 column(TotalNo; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    if Count = 0 then CurrReport.Break();
+                    if Count = 0 then CurrReport.Break;
                 end;
             }
         }
