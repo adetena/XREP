@@ -12,10 +12,6 @@ report 50102 "XReport2"
         {
             DataItemTableView = where(Number = const(1));
 
-            // column(XLinesPerPage; XLinesPerPage) { }
-            // column(XTotalsLines; XTotalsLines) { }
-            // column(XLines; XLines) { }
-
             dataitem(Child; Integer)
             {
                 DataItemTableView = where(Number = filter('1..34'));
@@ -31,10 +27,7 @@ report 50102 "XReport2"
                 var
                     Blanks: Integer;
                 begin
-                    Blanks := GetBlankLines(Child.Count + XTotalLines.Count);
-
-                    if Blanks = XLinesPerPage then
-                        Blanks := 0;
+                    Blanks := GetBlankLines(Child.Count + XTotalLines.Count) mod XLinesPerPage;
 
                     SetRange(Number, 1, Blanks);
                 end;
@@ -42,7 +35,7 @@ report 50102 "XReport2"
 
             dataitem(XTotalLines; Integer)
             {
-                DataItemTableView = where(Number = filter('1..7'));
+                DataItemTableView = where(Number = filter('1..9'));
 
                 column(TotalNo; Number) { }
             }
