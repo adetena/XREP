@@ -27,13 +27,13 @@ report 50102 "XReport2"
                 var
                     Blanks: Integer;
                 begin
-                    Blanks := GetBlankLines(Child.Count + XTotalLines.Count) mod XLinesPerPage;
+                    Blanks := GetBlankLines(Child.Count + Total.Count) mod XLinesPerPage;
 
                     SetRange(Number, 1, Blanks);
                 end;
             }
 
-            dataitem(XTotalLines; Integer)
+            dataitem(Total; Integer)
             {
                 DataItemTableView = where(Number = filter('1..9'));
 
