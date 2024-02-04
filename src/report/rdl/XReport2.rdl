@@ -28,7 +28,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox6">
+                        <Textbox Name="Textbox4">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -44,7 +44,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -146,7 +146,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -261,20 +260,22 @@ Public Function BlankNegAndZero(ByVal Value As Decimal)
         Return ""
     end if
     Return Value
-End Function
-
-Public Dim PageNo As Integer = 0
-
-Public Function SetPageNo()
-    PageNo += 1
 End Function</Code>
   <Language>=User!Language</Language>
+  <Variables>
+    <Variable Name="LinesPerPage">
+      <Value>42</Value>
+    </Variable>
+  </Variables>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
+        <Field Name="LinesPerPage">
+          <DataField>LinesPerPage</DataField>
+        </Field>
         <Field Name="ChildNo">
           <DataField>ChildNo</DataField>
         </Field>
