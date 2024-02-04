@@ -19,23 +19,19 @@ report 50102 "XReport2"
                 column(ChildNo; Number) { }
             }
 
-            dataitem(XBlankLines; Integer)
+            dataitem(Blank; Integer)
             {
                 column(BlankNo; Number) { }
 
                 trigger OnPreDataItem()
-                var
-                    Blanks: Integer;
                 begin
-                    Blanks := GetBlankLines(Child.Count + Total.Count) mod XLinesPerPage;
-
-                    SetRange(Number, 1, Blanks);
+                    SetRange(Number, 1, GetBlankLines);
                 end;
             }
 
             dataitem(Total; Integer)
             {
-                DataItemTableView = where(Number = filter('1..9'));
+                DataItemTableView = where(Number = filter('1..8'));
 
                 column(TotalNo; Number) { }
             }
@@ -44,14 +40,24 @@ report 50102 "XReport2"
 
     trigger OnInitReport()
     begin
-        XLinesPerPage := 42;
+        LinesPerPage := 42;
     end;
 
-    local procedure GetBlankLines(Lines: Integer): Integer
+    local procedure GetDataLines(): Integer
     begin
-        exit(XLinesPerPage - (Lines mod XLinesPerPage));
+        exit(Child.Count + Total.Count + 4);
+    end;
+
+    local procedure GetLastPageLines(): Integer
+    begin
+        exit(GetDataLines mod LinesPerPage);
+    end;
+
+    local procedure GetBlankLines(): Integer
+    begin
+        exit((LinesPerPage - GetLastPageLines) mod LinesPerPage);
     end;
 
     var
-        XLinesPerPage: Integer;
+        LinesPerPage: Integer;
 }
