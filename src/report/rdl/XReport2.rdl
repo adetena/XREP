@@ -27,6 +27,9 @@
         <Field Name="BlankNo">
           <DataField>BlankNo</DataField>
         </Field>
+        <Field Name="SubTotalNo">
+          <DataField>SubTotalNo</DataField>
+        </Field>
         <Field Name="TotalNo">
           <DataField>TotalNo</DataField>
         </Field>
@@ -108,10 +111,17 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
+                                  <Value>=Fields!SubTotalNo.Value</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>Orange</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
                                   <Value>=Fields!TotalNo.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>DarkOliveGreen</Color>
+                                    <Color>CornflowerBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
