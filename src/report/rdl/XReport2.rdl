@@ -97,16 +97,7 @@
                                     <Color>CornflowerBlue</Color>
                                   </Style>
                                 </TextRun>
-                                <TextRun>
-                                  <Value>=Fields!Test.Value</Value>
-                                  <MarkupType>HTML</MarkupType>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>Red</Color>
-                                  </Style>
-                                </TextRun>
                               </TextRuns>
-                              <SpaceAfter>=Iif(Fields!ChildNo.Value = 38, "0.125in", 0)</SpaceAfter>
                               <Style>
                                 <TextAlign>Center</TextAlign>
                               </Style>
@@ -384,9 +375,6 @@ End Function</Code>
       <Fields>
         <Field Name="ChildNo">
           <DataField>ChildNo</DataField>
-        </Field>
-        <Field Name="Test">
-          <DataField>Test</DataField>
         </Field>
         <Field Name="BlankNo">
           <DataField>BlankNo</DataField>
