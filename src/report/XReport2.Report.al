@@ -14,9 +14,19 @@ report 50102 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 30));
+                DataItemTableView = where(Number = filter(1 .. 32));
 
                 column(ChildNo; Number) { }
+                column(Test; Test) { }
+
+                trigger OnAfterGetRecord()
+                begin
+                    if Number = 5 then begin
+                        Test := 'EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY';
+                        OffsetLines += 1;
+                    end else
+                        Test := '';
+                end;
             }
 
             dataitem(Blank; Integer)
@@ -91,4 +101,5 @@ report 50102 "XReport2"
     var
         LinesPerPage: Integer;
         OffsetLines: Integer;
+        Test: Text;
 }
