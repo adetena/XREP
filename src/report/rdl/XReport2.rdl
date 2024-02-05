@@ -11,6 +11,31 @@
       <rd:DataSourceID>0bacedf2-4c73-4aa9-b2c7-fe38f7739bba</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="ChildNo">
+          <DataField>ChildNo</DataField>
+        </Field>
+        <Field Name="BlankNo">
+          <DataField>BlankNo</DataField>
+        </Field>
+        <Field Name="SubTotalNo">
+          <DataField>SubTotalNo</DataField>
+        </Field>
+        <Field Name="TotalNo">
+          <DataField>TotalNo</DataField>
+        </Field>
+        <Field Name="AsideNo">
+          <DataField>AsideNo</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -28,13 +53,21 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox3">
+                        <Textbox Name="Textbox5">
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TABLE HEADER</Value>
+                                  <Value>TABLE HEADER </Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>LightBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Code.PageNo</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -128,7 +161,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TABLE FOOTER</Value>
+                                  <Value>TABLE FOOTER </Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>LightBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value>=Code.PageNo</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -203,15 +244,24 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <KeepWithGroup>After</KeepWithGroup>
-                  <RepeatOnNewPage>true</RepeatOnNewPage>
-                </TablixMember>
-                <TablixMember>
                   <Group Name="Details" />
-                </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                  <TablixMembers>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Code.IsHeaderHidden()</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Code.Count()</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Code.IsFooterHidden()</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
@@ -375,6 +425,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -408,34 +464,30 @@ Public Function BlankNegAndZero(ByVal Value As Decimal)
         Return ""
     end if
     Return Value
+End Function
+
+Dim Lines As Integer = 4
+Public Dim PageNo As Integer
+
+Public Function IsHeaderHidden()
+    Dim Hidden = (Lines &lt;&gt; 4) And ((Lines Mod 44) &lt;&gt; 0)
+    If Not Hidden Then
+        PageNo += 1
+    End If
+    Return Hidden
+End Function
+
+Function IsFooterHidden()
+    Return (Lines Mod 44) &lt;&gt; 0
+End Function
+
+Public Function Count()
+    Lines += 1
+
+    Return False
 End Function</Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="ChildNo">
-          <DataField>ChildNo</DataField>
-        </Field>
-        <Field Name="BlankNo">
-          <DataField>BlankNo</DataField>
-        </Field>
-        <Field Name="SubTotalNo">
-          <DataField>SubTotalNo</DataField>
-        </Field>
-        <Field Name="TotalNo">
-          <DataField>TotalNo</DataField>
-        </Field>
-        <Field Name="AsideNo">
-          <DataField>AsideNo</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

@@ -13,7 +13,7 @@ report 50102 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 64));
+                DataItemTableView = where(Number = filter(1 .. 35));
 
                 column(ChildNo; Number) { }
             }
