@@ -11,31 +11,6 @@
       <rd:DataSourceID>0bacedf2-4c73-4aa9-b2c7-fe38f7739bba</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="ChildNo">
-          <DataField>ChildNo</DataField>
-        </Field>
-        <Field Name="BlankNo">
-          <DataField>BlankNo</DataField>
-        </Field>
-        <Field Name="SubTotalNo">
-          <DataField>SubTotalNo</DataField>
-        </Field>
-        <Field Name="TotalNo">
-          <DataField>TotalNo</DataField>
-        </Field>
-        <Field Name="AsideNo">
-          <DataField>AsideNo</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -248,7 +223,7 @@
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.IsHeaderHidden()</Hidden>
+                        <Hidden>=Code.IsHeaderHidden(Fields!LinesPerPage.Value, Fields!OffsetLines.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -258,7 +233,7 @@
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.IsFooterHidden()</Hidden>
+                        <Hidden>=Code.IsFooterHidden(Fields!LinesPerPage.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                   </TablixMembers>
@@ -425,12 +400,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -469,16 +438,18 @@ End Function
 Dim Lines As Integer = 4
 Public Dim PageNo As Integer
 
-Public Function IsHeaderHidden()
-    Dim Hidden = (Lines &lt;&gt; 4) And ((Lines Mod 44) &lt;&gt; 0)
+Public Function IsHeaderHidden(ByVal LinesPerPage, ByVal OffsetLines)
+    Dim Hidden = (Lines &lt;&gt; OffsetLines) And ((Lines Mod LinesPerPage) &lt;&gt; 0)
+
     If Not Hidden Then
         PageNo += 1
     End If
+
     Return Hidden
 End Function
 
-Function IsFooterHidden()
-    Return (Lines Mod 44) &lt;&gt; 0
+Function IsFooterHidden(ByVal LinesPerPage)
+    Return (Lines Mod LinesPerPage) &lt;&gt; 0
 End Function
 
 Public Function Count()
@@ -490,4 +461,35 @@ End Function</Code>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="LinesPerPage">
+          <DataField>LinesPerPage</DataField>
+        </Field>
+        <Field Name="OffsetLines">
+          <DataField>OffsetLines</DataField>
+        </Field>
+        <Field Name="ChildNo">
+          <DataField>ChildNo</DataField>
+        </Field>
+        <Field Name="BlankNo">
+          <DataField>BlankNo</DataField>
+        </Field>
+        <Field Name="SubTotalNo">
+          <DataField>SubTotalNo</DataField>
+        </Field>
+        <Field Name="TotalNo">
+          <DataField>TotalNo</DataField>
+        </Field>
+        <Field Name="AsideNo">
+          <DataField>AsideNo</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>

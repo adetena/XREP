@@ -11,6 +11,9 @@ report 50102 "XReport2"
         {
             DataItemTableView = where(Number = const(1));
 
+            column(LinesPerPage; LinesPerPage) { }
+            column(OffsetLines; OffsetLines) { }
+
             dataitem(Child; Integer)
             {
                 DataItemTableView = where(Number = filter(1 .. 35));
