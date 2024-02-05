@@ -14,7 +14,7 @@ report 50102 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 30));
+                DataItemTableView = where(Number = filter(1 .. 64));
 
                 column(ChildNo; Number) { }
             }
@@ -69,7 +69,7 @@ report 50102 "XReport2"
 
     trigger OnInitReport()
     begin
-        LinesPerPage := 42;
+        LinesPerPage := 44;
         OffsetLines := 4;
     end;
 
