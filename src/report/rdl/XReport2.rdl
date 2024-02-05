@@ -400,43 +400,9 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <Code>Public Function BlankZero(ByVal Value As Decimal)
-    if Value = 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankPos(ByVal Value As Decimal)
-    if Value &gt; 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankZeroAndPos(ByVal Value As Decimal)
-    if Value &gt;= 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankNeg(ByVal Value As Decimal)
-    if Value &lt; 0 then
-        Return ""
-    end if
-    Return Value
-End Function
-
-Public Function BlankNegAndZero(ByVal Value As Decimal)
-    if Value &lt;= 0 then
-        Return ""
-    end if
-    Return Value
-End Function
+  <Code>Public Dim PageNo As Integer
 
 Dim Lines As Integer = 4
-Public Dim PageNo As Integer
 
 Public Function IsHeaderHidden(ByVal LinesPerPage, ByVal OffsetLines)
     Dim Hidden = (Lines &lt;&gt; OffsetLines) And ((Lines Mod LinesPerPage) &lt;&gt; 0)
@@ -448,7 +414,7 @@ Public Function IsHeaderHidden(ByVal LinesPerPage, ByVal OffsetLines)
     Return Hidden
 End Function
 
-Function IsFooterHidden(ByVal LinesPerPage)
+Public Function IsFooterHidden(ByVal LinesPerPage)
     Return (Lines Mod LinesPerPage) &lt;&gt; 0
 End Function
 
