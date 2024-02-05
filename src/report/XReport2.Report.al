@@ -56,9 +56,9 @@ report 50102 "XReport2"
             }
         }
 
-        dataitem(XSideBars; Integer)
+        dataitem(Aside; Integer)
         {
-            column(XSideBar; Number) { }
+            column(AsideNo; Number) { }
 
             trigger OnPreDataItem()
             begin

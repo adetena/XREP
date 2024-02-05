@@ -98,6 +98,7 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
+                              <SpaceAfter>=Iif(Fields!ChildNo.Value = 38, "0.125in", 0)</SpaceAfter>
                               <Style>
                                 <TextAlign>Center</TextAlign>
                               </Style>
@@ -180,7 +181,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Filters>
               <Filter>
-                <FilterExpression>=IsNothing(Fields!XSideBar.Value)</FilterExpression>
+                <FilterExpression>=IsNothing(Fields!AsideNo.Value)</FilterExpression>
                 <Operator>Equal</Operator>
                 <FilterValues>
                   <FilterValue DataType="Boolean">true</FilterValue>
@@ -249,7 +250,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!XSideBar.Value</Value>
+                                  <Value>=Fields!AsideNo.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -290,7 +291,7 @@
                 <TablixMember>
                   <Group Name="Details2">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!XSideBar.Value</GroupExpression>
+                      <GroupExpression>=Fields!AsideNo.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                 </TablixMember>
@@ -299,7 +300,7 @@
             <DataSetName>DataSet_Result</DataSetName>
             <Filters>
               <Filter>
-                <FilterExpression>=IsNothing(Fields!XSideBar.Value)</FilterExpression>
+                <FilterExpression>=IsNothing(Fields!AsideNo.Value)</FilterExpression>
                 <Operator>Equal</Operator>
                 <FilterValues>
                   <FilterValue DataType="Boolean">false</FilterValue>
@@ -385,8 +386,8 @@ End Function</Code>
         <Field Name="TotalNo">
           <DataField>TotalNo</DataField>
         </Field>
-        <Field Name="XSideBar">
-          <DataField>XSideBar</DataField>
+        <Field Name="AsideNo">
+          <DataField>AsideNo</DataField>
         </Field>
       </Fields>
       <Query>
