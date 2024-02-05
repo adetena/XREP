@@ -3,7 +3,6 @@ report 50102 "XReport2"
     ApplicationArea = All;
     Caption = 'XReport2';
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = RDLC;
     RDLCLayout = 'src/report/rdl/XReport2.rdl';
 
     dataset
