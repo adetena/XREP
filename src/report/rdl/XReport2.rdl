@@ -258,6 +258,9 @@
             <Left>0.25in</Left>
             <Height>0.94in</Height>
             <Width>8.02in</Width>
+            <Visibility>
+              <Hidden>=Code.SetOffset(Fields!OffsetLines.Value)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -402,10 +405,18 @@
   </ReportSections>
   <Code>Public Dim PageNo As Integer
 
-Dim Lines As Integer = 4
+Dim Lines As Integer
+
+Public Function SetOffset(ByVal OffsetLines)
+    Lines = OffsetLines
+
+    Return False
+End Function
 
 Public Function IsHeaderHidden(ByVal LinesPerPage, ByVal OffsetLines)
-    Dim Hidden = (Lines &lt;&gt; OffsetLines) And ((Lines Mod LinesPerPage) &lt;&gt; 0)
+    Dim IsNotFirstLine = Lines &lt;&gt; OffsetLines
+    Dim IsNotFirstLineOfPage = (Lines Mod LinesPerPage) &lt;&gt; 0
+    Dim Hidden = IsNotFirstLine And IsNotFirstLineOfPage
 
     If Not Hidden Then
         PageNo += 1
