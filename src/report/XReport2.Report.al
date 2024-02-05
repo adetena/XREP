@@ -14,14 +14,14 @@ report 50102 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 32));
+                DataItemTableView = where(Number = filter(1 .. 42));
 
                 column(ChildNo; Number) { }
                 column(Test; Test) { }
 
                 trigger OnAfterGetRecord()
                 begin
-                    if Number = 5 then begin
+                    if Number = 38 then begin
                         Test := 'EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY-EMPTY';
                         OffsetLines += 1;
                     end else
