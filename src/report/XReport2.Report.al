@@ -16,7 +16,7 @@ report 50102 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 35));
+                DataItemTableView = where(Number = filter(1 .. 36));
 
                 column(ChildNo; Number) { }
             }
@@ -27,9 +27,7 @@ report 50102 "XReport2"
 
                 trigger OnPreDataItem()
                 begin
-
-                    if GetBlankLines = 0 then CurrReport.Break;
-                    if GetBlankLines > 0 then SetRange(Number, 1, GetBlankLines);
+                    if CountBlanks = 0 then CurrReport.Break else SetRange(Number, 1, CountBlanks);
                 end;
             }
 
@@ -64,7 +62,7 @@ report 50102 "XReport2"
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, Round(GetDataLines / LinesPerPage, 1, '>'));
+                SetRange(Number, 1, (CountLines + CountBlanks) div LinesPerPage);
             end;
         }
     }
@@ -75,19 +73,14 @@ report 50102 "XReport2"
         OffsetLines := 4;
     end;
 
-    local procedure GetDataLines(): Integer
+    local procedure CountLines(): Integer
     begin
         exit(Child.Count + SubTotal.Count + Total.Count + OffsetLines);
     end;
 
-    local procedure GetLastPageLines(): Integer
+    local procedure CountBlanks(): Integer
     begin
-        exit(GetDataLines mod LinesPerPage);
-    end;
-
-    local procedure GetBlankLines(): Integer
-    begin
-        exit((LinesPerPage - GetLastPageLines) mod LinesPerPage);
+        exit((LinesPerPage - (CountLines mod LinesPerPage)) mod LinesPerPage);
     end;
 
     var

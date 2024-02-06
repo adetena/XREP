@@ -38,7 +38,7 @@
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>LightBlue</Color>
+                                    <Color>CornflowerBlue</Color>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
@@ -46,7 +46,7 @@
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>LightBlue</Color>
+                                    <Color>CornflowerBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -61,7 +61,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>SlateBlue</BackgroundColor>
+                            <BackgroundColor>RoyalBlue</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                           </Style>
                         </Textbox>
@@ -89,7 +89,7 @@
                                   <Value>=Fields!BlankNo.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>Brown</Color>
+                                    <Color>HotPink</Color>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
@@ -140,7 +140,7 @@
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>LightBlue</Color>
+                                    <Color>CornflowerBlue</Color>
                                   </Style>
                                 </TextRun>
                                 <TextRun>
@@ -148,7 +148,7 @@
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>LightBlue</Color>
+                                    <Color>CornflowerBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -163,7 +163,7 @@
                               <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>SlateBlue</BackgroundColor>
+                            <BackgroundColor>RoyalBlue</BackgroundColor>
                             <VerticalAlign>Middle</VerticalAlign>
                           </Style>
                         </Textbox>
@@ -186,7 +186,7 @@
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
-                                    <Color>LightBlue</Color>
+                                    <Color>RoyalBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -277,7 +277,7 @@
                     <Style>
                       <FontSize>6pt</FontSize>
                       <FontWeight>Bold</FontWeight>
-                      <Color>LightBlue</Color>
+                      <Color>RoyalBlue</Color>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -324,6 +324,7 @@
                                   <Value>=Fields!AsideNo.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>RoyalBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
