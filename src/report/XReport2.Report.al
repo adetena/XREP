@@ -11,8 +11,8 @@ report 50102 "XReport2"
         {
             DataItemTableView = where(Number = const(1));
 
-            column(LinesPerPage; LinesPerPage) { }
-            column(OffsetLines; OffsetLines) { }
+            column(PageLines; "Page Lines") { }
+            column(OffsetLines; "Offset Lines") { }
 
             dataitem(Child; Integer)
             {
@@ -62,28 +62,28 @@ report 50102 "XReport2"
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, (CountLines + CountBlanks) div LinesPerPage);
+                SetRange(Number, 1, (CountLines + CountBlanks) div "Page Lines");
             end;
         }
     }
 
     trigger OnInitReport()
     begin
-        LinesPerPage := 44;
-        OffsetLines := 4;
+        "Page Lines" := 44;
+        "Offset Lines" := 4;
     end;
 
     local procedure CountLines(): Integer
     begin
-        exit(Child.Count + SubTotal.Count + Total.Count + OffsetLines);
+        exit(Child.Count + SubTotal.Count + Total.Count + "Offset Lines");
     end;
 
     local procedure CountBlanks(): Integer
     begin
-        exit((LinesPerPage - (CountLines mod LinesPerPage)) mod LinesPerPage);
+        exit(("Page Lines" - (CountLines mod "Page Lines")) mod "Page Lines");
     end;
 
     var
-        LinesPerPage: Integer;
-        OffsetLines: Integer;
+        "Page Lines": Integer;
+        "Offset Lines": Integer;
 }
