@@ -1,9 +1,8 @@
-report 50101 "XReport"
+report 50100 "XReport"
 {
     ApplicationArea = All;
     Caption = 'XReport';
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = RDLC;
     RDLCLayout = 'src/report/rdl/XReport.rdl';
 
     dataset
@@ -12,95 +11,79 @@ report 50101 "XReport"
         {
             DataItemTableView = where(Number = const(1));
 
-            column(XLinesPerPage; XLinesPerPage) { }
-            column(XTotalsLines; XTotalsLines) { }
-            column(XLines; XLines) { }
+            column(Page_Lines; "Page Lines") { }
+            column(Offset_Lines; "Offset Lines") { }
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter('1..34'));
+                DataItemTableView = where(Number = filter(1 .. 36));
 
-                column(No_; Number) { }
+                column(Child_No; Number) { }
+            }
+
+            dataitem(Blank; Integer)
+            {
+                column(Blank_No; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    XLines := Count;
+                    if CountBlanks = 0 then CurrReport.Break else SetRange(Number, 1, CountBlanks);
                 end;
             }
 
-            dataitem(XBlankLines; Integer)
+            dataitem(Subtotal; Integer)
             {
-                column(XBlanks; XBlanks) { }
-                column(XBlank; Number) { }
+                DataItemTableView = where(Number = filter(1 .. 2));
+
+                column(Subtotal_No; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange(Number, 1, GetBlanks);
+                    if IsEmpty then CurrReport.Break;
+                end;
+            }
+
+            dataitem(Total; Integer)
+            {
+                DataItemTableView = where(Number = filter(1 .. 4));
+
+                column(Total_No; Number) { }
+
+                trigger OnPreDataItem()
+                begin
+                    if IsEmpty then CurrReport.Break;
                 end;
             }
         }
 
-        dataitem(XSideBars; Integer)
+        dataitem(Aside; Integer)
         {
-            column(XSideBar; Number) { }
+            column(Aside_No; Number) { }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, GetSideBars);
+                SetRange(Number, 1, (CountLines + CountBlanks) div "Page Lines");
             end;
         }
     }
 
     trigger OnInitReport()
     begin
-        XLinesPerPage := 40;
-        XTotalsLines := 3;
+        "Page Lines" := 44;
+        "Offset Lines" := 4;
     end;
 
-    local procedure GetLines(): Integer
+    local procedure CountLines(): Integer
     begin
-        exit(XLines mod XLinesPerPage);
+        exit(Child.Count + Subtotal.Count + Total.Count + "Offset Lines");
     end;
 
-    local procedure GetPages(): Integer
+    local procedure CountBlanks(): Integer
     begin
-        exit(XLines div XLinesPerPage);
-    end;
-
-    local procedure TestRange(Range: Integer)
-    begin
-        if (Range = XLinesPerPage) and (XTotalsLines = 0) then
-            CurrReport.Break;
-    end;
-
-    local procedure TestBlanks()
-    begin
-        if XBlanks < XTotalsLines then begin
-            XBlanks += XLinesPerPage;
-            XLines += XLinesPerPage;
-        end;
-    end;
-
-    local procedure GetBlanks(): Integer
-    begin
-        XBlanks := XLinesPerPage - GetLines;
-
-        TestRange(XBlanks);
-        TestBlanks;
-
-        exit(XBlanks);
-    end;
-
-    local procedure GetSideBars(): Integer
-    begin
-        TestRange(XLines);
-
-        exit(GetPages);
+        exit(("Page Lines" - (CountLines mod "Page Lines")) mod "Page Lines");
     end;
 
     var
-        XLinesPerPage: Integer;
-        XTotalsLines: Integer;
-        XBlanks: Integer;
-        XLines: Integer;
+        "Page Lines": Integer;
+        "Offset Lines": Integer;
 }
