@@ -73,6 +73,10 @@ report 50100 "XReport"
         "Offset Lines" := 4;
     end;
 
+    var
+        "Page Lines": Integer;
+        "Offset Lines": Integer;
+
     local procedure CountLines(): Integer
     begin
         exit(Child.Count + Subtotal.Count + Total.Count + "Offset Lines");
@@ -82,8 +86,4 @@ report 50100 "XReport"
     begin
         exit(("Page Lines" - (CountLines mod "Page Lines")) mod "Page Lines");
     end;
-
-    var
-        "Page Lines": Integer;
-        "Offset Lines": Integer;
 }
