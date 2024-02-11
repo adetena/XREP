@@ -33,7 +33,7 @@ report 50100 "XReport"
 
             dataitem(Subtotal; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 1));
+                DataItemTableView = where(Number = filter(1 .. 2));
 
                 column(Subtotal_No; Number) { }
 
@@ -79,7 +79,10 @@ report 50100 "XReport"
 
     local procedure CountLines(): Integer
     begin
-        exit(Child.Count + Subtotal.Count + Total.Count + "Offset Lines");
+        if Subtotal.Count > 0 then
+            exit(Child.Count + 1 + Subtotal.Count + Total.Count + "Offset Lines")
+        else
+            exit(Child.Count + Total.Count + "Offset Lines")
     end;
 
     local procedure CountBlanks(): Integer
