@@ -98,18 +98,6 @@
                                                   <FontWeight>Bold</FontWeight>
                                                 </Style>
                                               </TextRun>
-                                              <TextRun>
-                                                <Value xml:space="preserve"> </Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
-                                              <TextRun>
-                                                <Value>=Code.Count</Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
                                             </TextRuns>
                                             <Style>
                                               <TextAlign>Center</TextAlign>
@@ -117,6 +105,9 @@
                                           </Paragraph>
                                         </Paragraphs>
                                         <rd:DefaultName>ChildNo</rd:DefaultName>
+                                        <Visibility>
+                                          <Hidden>=Code.Count</Hidden>
+                                        </Visibility>
                                         <Style>
                                           <Border>
                                             <Color>LightGrey</Color>
@@ -204,18 +195,6 @@
                                                   <Color>HotPink</Color>
                                                 </Style>
                                               </TextRun>
-                                              <TextRun>
-                                                <Value xml:space="preserve"> </Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
-                                              <TextRun>
-                                                <Value>=Code.Count</Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
                                             </TextRuns>
                                             <Style>
                                               <TextAlign>Center</TextAlign>
@@ -223,6 +202,9 @@
                                           </Paragraph>
                                         </Paragraphs>
                                         <rd:DefaultName>ChildNo</rd:DefaultName>
+                                        <Visibility>
+                                          <Hidden>=Code.Count</Hidden>
+                                        </Visibility>
                                         <Style>
                                           <Border>
                                             <Color>LightGrey</Color>
@@ -276,7 +258,6 @@
                             </Border>
                           </Style>
                         </Tablix>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -311,19 +292,6 @@
                                                   <Color>Orange</Color>
                                                 </Style>
                                               </TextRun>
-                                              <TextRun>
-                                                <Value xml:space="preserve"> </Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <Color>Orange</Color>
-                                                </Style>
-                                              </TextRun>
-                                              <TextRun>
-                                                <Value>=Code.Count</Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
                                             </TextRuns>
                                             <Style>
                                               <TextAlign>Center</TextAlign>
@@ -331,6 +299,9 @@
                                           </Paragraph>
                                         </Paragraphs>
                                         <rd:DefaultName>ChildNo</rd:DefaultName>
+                                        <Visibility>
+                                          <Hidden>=Code.Count</Hidden>
+                                        </Visibility>
                                         <Style>
                                           <Border>
                                             <Color>LightGrey</Color>
@@ -418,19 +389,6 @@
                                                   <Color>CornflowerBlue</Color>
                                                 </Style>
                                               </TextRun>
-                                              <TextRun>
-                                                <Value xml:space="preserve"> </Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <Color>CornflowerBlue</Color>
-                                                </Style>
-                                              </TextRun>
-                                              <TextRun>
-                                                <Value>=Code.Count</Value>
-                                                <Style>
-                                                  <FontWeight>Bold</FontWeight>
-                                                </Style>
-                                              </TextRun>
                                             </TextRuns>
                                             <Style>
                                               <TextAlign>Center</TextAlign>
@@ -438,6 +396,9 @@
                                           </Paragraph>
                                         </Paragraphs>
                                         <rd:DefaultName>ChildNo</rd:DefaultName>
+                                        <Visibility>
+                                          <Hidden>=Code.Count</Hidden>
+                                        </Visibility>
                                         <Style>
                                           <Border>
                                             <Color>LightGrey</Color>
@@ -515,22 +476,6 @@
                                 </TextRun>
                                 <TextRun>
                                   <Value>=Code.PageNo</Value>
-                                  <Style>
-                                    <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>CornflowerBlue</Color>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value xml:space="preserve"> </Value>
-                                  <Style>
-                                    <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>CornflowerBlue</Color>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value>=Code.Lines</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
