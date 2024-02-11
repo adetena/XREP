@@ -1,9 +1,10 @@
-report 50100 "XReport"
+report 50102 "XReport3"
 {
     ApplicationArea = All;
-    Caption = 'XReport';
+    Caption = 'XReport3';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = 'src/report/rdl/XReport.rdl';
+    DefaultLayout = RDLC;
+    RDLCLayout = 'src/report/rdl/XReport3.rdl';
 
     dataset
     {
@@ -11,82 +12,95 @@ report 50100 "XReport"
         {
             DataItemTableView = where(Number = const(1));
 
-            column(Page_Lines; "Page Lines") { }
-            column(Offset_Lines; "Offset Lines") { }
+            column(XLinesPerPage; XLinesPerPage) { }
+            column(XTotalsLines; XTotalsLines) { }
+            column(XLines; XLines) { }
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 34));
+                DataItemTableView = where(Number = filter('1..34'));
 
-                column(Child_No; Number) { }
-            }
-
-            dataitem(Blank; Integer)
-            {
-                column(Blank_No; Number) { }
+                column(No_; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    if CountBlanks = 0 then CurrReport.Break else SetRange(Number, 1, CountBlanks);
+                    XLines := Count;
                 end;
             }
 
-            dataitem(Subtotal; Integer)
+            dataitem(XBlankLines; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 2));
-
-                column(Subtotal_No; Number) { }
+                column(XBlanks; XBlanks) { }
+                column(XBlank; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    if IsEmpty then CurrReport.Break;
-                end;
-            }
-
-            dataitem(Total; Integer)
-            {
-                DataItemTableView = where(Number = filter(1 .. 4));
-
-                column(Total_No; Number) { }
-
-                trigger OnPreDataItem()
-                begin
-                    if IsEmpty then CurrReport.Break;
+                    SetRange(Number, 1, GetBlanks);
                 end;
             }
         }
 
-        dataitem(Aside; Integer)
+        dataitem(XSideBars; Integer)
         {
-            column(Aside_No; Number) { }
+            column(XSideBar; Number) { }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, (CountLines + CountBlanks) div "Page Lines");
+                SetRange(Number, 1, GetSideBars);
             end;
         }
     }
 
     trigger OnInitReport()
     begin
-        "Page Lines" := 44;
-        "Offset Lines" := 4;
+        XLinesPerPage := 40;
+        XTotalsLines := 3;
+    end;
+
+    local procedure GetLines(): Integer
+    begin
+        exit(XLines mod XLinesPerPage);
+    end;
+
+    local procedure GetPages(): Integer
+    begin
+        exit(XLines div XLinesPerPage);
+    end;
+
+    local procedure TestRange(Range: Integer)
+    begin
+        if (Range = XLinesPerPage) and (XTotalsLines = 0) then
+            CurrReport.Break;
+    end;
+
+    local procedure TestBlanks()
+    begin
+        if XBlanks < XTotalsLines then begin
+            XBlanks += XLinesPerPage;
+            XLines += XLinesPerPage;
+        end;
+    end;
+
+    local procedure GetBlanks(): Integer
+    begin
+        XBlanks := XLinesPerPage - GetLines;
+
+        TestRange(XBlanks);
+        TestBlanks;
+
+        exit(XBlanks);
+    end;
+
+    local procedure GetSideBars(): Integer
+    begin
+        TestRange(XLines);
+
+        exit(GetPages);
     end;
 
     var
-        "Page Lines": Integer;
-        "Offset Lines": Integer;
-
-    local procedure CountLines(): Integer
-    begin
-        if Subtotal.Count > 0 then
-            exit(Child.Count + 1 + Subtotal.Count + Total.Count + "Offset Lines")
-        else
-            exit(Child.Count + Total.Count + "Offset Lines")
-    end;
-
-    local procedure CountBlanks(): Integer
-    begin
-        exit(("Page Lines" - (CountLines mod "Page Lines")) mod "Page Lines");
-    end;
+        XLinesPerPage: Integer;
+        XTotalsLines: Integer;
+        XBlanks: Integer;
+        XLines: Integer;
 }
