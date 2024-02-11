@@ -85,6 +85,36 @@
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ChildNo</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox3">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Blank_No.Value</Value>
                                   <Style>
@@ -92,6 +122,36 @@
                                     <Color>HotPink</Color>
                                   </Style>
                                 </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox3</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Subtotal_No.Value</Value>
                                   <Style>
@@ -99,6 +159,36 @@
                                     <Color>Orange</Color>
                                   </Style>
                                 </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>None</Style>
+                            </Border>
+                            <VerticalAlign>Middle</VerticalAlign>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Total_No.Value</Value>
                                   <Style>
@@ -112,7 +202,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ChildNo</rd:DefaultName>
+                          <rd:DefaultName>Textbox7</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -228,7 +318,22 @@
                     </TablixMember>
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=Code.Count()</Hidden>
+                        <Hidden>=IsNothing(Fields!Child_No.Value)</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IsNothing(Fields!Blank_No.Value)</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IsNothing(Fields!Subtotal_No.Value)</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=IsNothing(Fields!Total_No.Value)</Hidden>
                       </Visibility>
                     </TablixMember>
                     <TablixMember>
@@ -256,7 +361,7 @@
             </Filters>
             <Top>1in</Top>
             <Left>0.25in</Left>
-            <Height>0.94in</Height>
+            <Height>1.69in</Height>
             <Width>8.02in</Width>
             <Visibility>
               <Hidden>=Code.SetOffset(Fields!Offset_Lines.Value)</Hidden>
@@ -423,17 +528,13 @@ Public Function IsHeaderHidden(ByVal PageLines, ByVal OffsetLines)
         PageNo += 1
     End If
 
+    Lines += 1
+
     Return Hidden
 End Function
 
 Public Function IsFooterHidden(ByVal PageLines)
     Return (Lines Mod PageLines) &lt;&gt; 0
-End Function
-
-Public Function Count()
-    Lines += 1
-
-    Return False
 End Function</Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
