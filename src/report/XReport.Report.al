@@ -1,10 +1,10 @@
-report 50102 "XReport3"
+report 50100 "XReport"
 {
     ApplicationArea = All;
-    Caption = 'XReport3';
+    Caption = 'XReport';
     UsageCategory = ReportsAndAnalysis;
     DefaultLayout = RDLC;
-    RDLCLayout = 'src/report/rdl/XReport3.rdl';
+    RDLCLayout = 'src/report/rdl/XReport.rdl';
 
     dataset
     {
