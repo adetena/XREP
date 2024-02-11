@@ -16,7 +16,7 @@ report 50100 "XReport"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 36));
+                DataItemTableView = where(Number = filter(1 .. 34));
 
                 column(Child_No; Number) { }
             }
@@ -33,7 +33,7 @@ report 50100 "XReport"
 
             dataitem(Subtotal; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 2));
+                DataItemTableView = where(Number = filter(1 .. 1));
 
                 column(Subtotal_No; Number) { }
 
