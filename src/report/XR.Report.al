@@ -27,7 +27,7 @@ report 50102 XR
 
             dataitem(Blank; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 28));
+                DataItemTableView = where(Number = filter(1 .. 29));
 
                 column(Blank_Row_No; "Blank Row No.") { }
 
