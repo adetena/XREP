@@ -4849,7 +4849,7 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.025in</Top>
+            <Top>0in</Top>
             <Left>0in</Left>
             <Height>2.5in</Height>
             <Width>8.27in</Width>
@@ -4860,7 +4860,7 @@
             </Style>
           </Tablix>
         </ReportItems>
-        <Height>2.525in</Height>
+        <Height>2.5in</Height>
         <Style />
       </Body>
       <Width>8.27in</Width>
