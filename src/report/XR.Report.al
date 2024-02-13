@@ -31,6 +31,11 @@ report 50102 XR
 
                 column(Blank_Row_No; "Blank Row No.") { }
 
+                trigger OnPreDataItem()
+                begin
+                    SetRange(Number, 1, CountBlanks);
+                end;
+
                 trigger OnAfterGetRecord()
                 begin
                     "Blank Row No." += 1;
@@ -68,10 +73,26 @@ report 50102 XR
         }
     }
 
+    trigger OnInitReport()
+    begin
+        "Lines Per Page" := 43;
+    end;
+
     var
         "Parent Row No.": Integer;
         "Child Row No.": Integer;
         "Blank Row No.": Integer;
         "Subtotal Row No.": Integer;
         "Total Row No.": Integer;
+        "Lines Per Page": Integer;
+
+    local procedure CountLines(): Integer
+    begin
+        exit(Child.Count + Subtotal.Count + Total.Count)
+    end;
+
+    local procedure CountBlanks(): Integer
+    begin
+        exit(("Lines Per Page" - (CountLines mod "Lines Per Page")) mod "Lines Per Page");
+    end;
 }
