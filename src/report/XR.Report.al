@@ -15,7 +15,7 @@ report 50102 XR
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 5));
+                DataItemTableView = where(Number = filter(1 .. 26));
 
                 column(Child_Row_No; "Child Row No.") { }
 
