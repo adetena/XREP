@@ -9,7 +9,7 @@ report 50102 XR
     {
         dataitem(Parent; Integer)
         {
-            DataItemTableView = where(Number = const(1));
+            DataItemTableView = where(Number = filter(1 .. 2));
 
             column(Parent_Row_No; "Parent Row No.") { }
 
@@ -27,7 +27,7 @@ report 50102 XR
 
             dataitem(Blank; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 49));
+                // DataItemTableView = where(Number = filter(1 .. 49));
 
                 column(Blank_Row_No; "Blank Row No.") { }
 

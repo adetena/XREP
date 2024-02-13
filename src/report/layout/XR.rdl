@@ -11,6 +11,31 @@
       <rd:DataSourceID>21d50992-55cc-4fdc-95d5-d85baeab5d39</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Parent_Row_No">
+          <DataField>Parent_Row_No</DataField>
+        </Field>
+        <Field Name="Child_Row_No">
+          <DataField>Child_Row_No</DataField>
+        </Field>
+        <Field Name="Blank_Row_No">
+          <DataField>Blank_Row_No</DataField>
+        </Field>
+        <Field Name="Subtotal_Row_No">
+          <DataField>Subtotal_Row_No</DataField>
+        </Field>
+        <Field Name="Total_Row_No">
+          <DataField>Total_Row_No</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -24,7 +49,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.3in</Height>
+                  <Height>0.3175in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -51,7 +76,7 @@
                                 </TablixColumns>
                                 <TablixRows>
                                   <TablixRow>
-                                    <Height>0.03125in</Height>
+                                    <Height>0.04875in</Height>
                                     <TablixCells>
                                       <TablixCell>
                                         <CellContents>
@@ -593,7 +618,7 @@
                               <DataSetName>DataSet_Result</DataSetName>
                               <Top>0in</Top>
                               <Left>0in</Left>
-                              <Height>0.3in</Height>
+                              <Height>0.3175in</Height>
                               <Width>8.26999in</Width>
                               <Style>
                                 <Border>
@@ -609,7 +634,6 @@
                             </Border>
                           </Style>
                         </Rectangle>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -4812,6 +4836,7 @@
               <TablixMembers>
                 <TablixMember>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details">
@@ -4830,13 +4855,14 @@
                 </TablixMember>
                 <TablixMember>
                   <KeepWithGroup>Before</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>0.0175in</Top>
+            <Top>0in</Top>
             <Left>0in</Left>
-            <Height>2.4in</Height>
+            <Height>2.4175in</Height>
             <Width>8.27in</Width>
             <Style>
               <Border>
@@ -4860,6 +4886,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -4899,29 +4931,4 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="Parent_Row_No">
-          <DataField>Parent_Row_No</DataField>
-        </Field>
-        <Field Name="Child_Row_No">
-          <DataField>Child_Row_No</DataField>
-        </Field>
-        <Field Name="Blank_Row_No">
-          <DataField>Blank_Row_No</DataField>
-        </Field>
-        <Field Name="Subtotal_Row_No">
-          <DataField>Subtotal_Row_No</DataField>
-        </Field>
-        <Field Name="Total_Row_No">
-          <DataField>Total_Row_No</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>
