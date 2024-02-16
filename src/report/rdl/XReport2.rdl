@@ -510,8 +510,7 @@
     </ReportSection>
   </ReportSections>
   <Code>Public Dim PageNo As Integer
-
-Dim Lines As Integer
+Public Dim Lines As Integer
 
 Public Function SetOffset(ByVal OffsetLines)
     Lines = OffsetLines
