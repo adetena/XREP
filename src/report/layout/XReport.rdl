@@ -557,9 +557,9 @@ Public Function IsFooterHidden()
     IsFooterHidden = (Me.Line Mod Me.LinesPerPage) &lt;&gt; 0
 End Function
 
-Public Function IsLineHidden(ByVal Fi)
-    IsLineHidden = IsNothing(Fi)
-    If Not IsLineHidden Then Line += 1
+Public Function IsLineHidden(ByVal Line)
+    IsLineHidden = IsNothing(Line)
+    If Not IsLineHidden Then Me.Line += 1
 End Function</Code>
   <Language>=User!Language</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
