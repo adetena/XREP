@@ -11,6 +11,37 @@
       <rd:DataSourceID>0bacedf2-4c73-4aa9-b2c7-fe38f7739bba</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Page_Lines">
+          <DataField>Page_Lines</DataField>
+        </Field>
+        <Field Name="Offset_Lines">
+          <DataField>Offset_Lines</DataField>
+        </Field>
+        <Field Name="Child_No">
+          <DataField>Child_No</DataField>
+        </Field>
+        <Field Name="Blank_No">
+          <DataField>Blank_No</DataField>
+        </Field>
+        <Field Name="Subtotal_No">
+          <DataField>Subtotal_No</DataField>
+        </Field>
+        <Field Name="Total_No">
+          <DataField>Total_No</DataField>
+        </Field>
+        <Field Name="Aside_No">
+          <DataField>Aside_No</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -309,7 +340,14 @@
             <TablixRowHierarchy>
               <TablixMembers>
                 <TablixMember>
-                  <Group Name="Details" />
+                  <Group Name="Details">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Child_No.Value</GroupExpression>
+                      <GroupExpression>=Fields!Blank_No.Value</GroupExpression>
+                      <GroupExpression>=Fields!Subtotal_No.Value</GroupExpression>
+                      <GroupExpression>=Fields!Total_No.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
                   <TablixMembers>
                     <TablixMember>
                       <Visibility>
@@ -509,6 +547,12 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Dim PageNo As Integer
 Public Dim Lines As Integer
 
@@ -539,35 +583,4 @@ End Function</Code>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="Page_Lines">
-          <DataField>Page_Lines</DataField>
-        </Field>
-        <Field Name="Offset_Lines">
-          <DataField>Offset_Lines</DataField>
-        </Field>
-        <Field Name="Child_No">
-          <DataField>Child_No</DataField>
-        </Field>
-        <Field Name="Blank_No">
-          <DataField>Blank_No</DataField>
-        </Field>
-        <Field Name="Subtotal_No">
-          <DataField>Subtotal_No</DataField>
-        </Field>
-        <Field Name="Total_No">
-          <DataField>Total_No</DataField>
-        </Field>
-        <Field Name="Aside_No">
-          <DataField>Aside_No</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

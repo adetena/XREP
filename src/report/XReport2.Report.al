@@ -11,8 +11,8 @@ report 50101 "XReport2"
         {
             DataItemTableView = where(Number = const(1));
 
-            column(Page_Lines; "Page Lines") { }
-            column(Offset_Lines; "Offset Lines") { }
+            column(Page_Lines; "Lines Per Page") { }
+            column(Offset_Lines; "Report Header Lines") { }
 
             dataitem(Child; Integer)
             {
@@ -69,33 +69,33 @@ report 50101 "XReport2"
 
     trigger OnInitReport()
     begin
-        "Page Lines" := 44;
-        "Offset Lines" := 4;
+        "Report Header Lines" := 4;
+        "Lines Per Page" := 44;
     end;
 
     var
-        "Page Lines": Integer;
-        "Offset Lines": Integer;
+        "Lines Per Page": Integer;
+        "Report Header Lines": Integer;
 
     local procedure CountLines(): Integer
     begin
-        exit(Child.Count + Subtotal.Count + Total.Count + "Offset Lines")
+        exit("Report Header Lines" + Child.Count + Subtotal.Count + Total.Count)
     end;
 
     local procedure CalcBlanks(): Integer
     begin
-        exit(("Page Lines" - (CountLines mod "Page Lines")) mod "Page Lines");
+        exit(("Lines Per Page" - (CountLines mod "Lines Per Page")) mod "Lines Per Page");
     end;
 
     local procedure SetBlankRange()
     begin
-        Blank.SetRange(Number, 1, CalcBlanks());
+        Blank.SetRange(Number, 1, CalcBlanks);
 
         if Blank.IsEmpty then CurrReport.Break;
     end;
 
     local procedure SetAsideRange()
     begin
-        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div "Page Lines");
+        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div "Lines Per Page");
     end;
 }
