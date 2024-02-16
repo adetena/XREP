@@ -82,20 +82,20 @@ report 50101 "XReport2"
         exit(Child.Count + Subtotal.Count + Total.Count + "Offset Lines")
     end;
 
-    local procedure CountBlanks(): Integer
+    local procedure CalcBlanks(): Integer
     begin
         exit(("Page Lines" - (CountLines mod "Page Lines")) mod "Page Lines");
     end;
 
     local procedure SetBlankRange()
     begin
-        Blank.SetRange(Number, 1, CountBlanks());
+        Blank.SetRange(Number, 1, CalcBlanks());
 
         if Blank.IsEmpty then CurrReport.Break;
     end;
 
     local procedure SetAsideRange()
     begin
-        Aside.SetRange(Number, 1, (CountLines + CountBlanks) div "Page Lines");
+        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div "Page Lines");
     end;
 }
