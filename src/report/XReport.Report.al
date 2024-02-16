@@ -1,9 +1,9 @@
-report 50101 "XReport2"
+report 50100 XReport
 {
     ApplicationArea = All;
-    Caption = 'XReport2';
+    Caption = 'XReport';
     UsageCategory = ReportsAndAnalysis;
-    RDLCLayout = 'src/report/rdl/XReport2.rdl';
+    RDLCLayout = 'src/report/layout/XReport.rdl';
 
     dataset
     {
@@ -16,7 +16,7 @@ report 50101 "XReport2"
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 36));
+                DataItemTableView = where(Number = filter(1 .. 32));
 
                 column(Child_No; Number) { }
             }
