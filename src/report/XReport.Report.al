@@ -1,10 +1,9 @@
-report 50100 "XReport"
+report 50101 "XReport2"
 {
     ApplicationArea = All;
-    Caption = 'XReport';
+    Caption = 'XReport2';
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = RDLC;
-    RDLCLayout = 'src/report/rdl/XReport.rdl';
+    RDLCLayout = 'src/report/rdl/XReport2.rdl';
 
     dataset
     {
@@ -12,95 +11,91 @@ report 50100 "XReport"
         {
             DataItemTableView = where(Number = const(1));
 
-            column(XLinesPerPage; XLinesPerPage) { }
-            column(XTotalsLines; XTotalsLines) { }
-            column(XLines; XLines) { }
+            column(Report_Header_Lines; "Report Header Lines") { }
+            column(Lines_Per_Page; "Lines Per Page") { }
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter('1..34'));
+                DataItemTableView = where(Number = filter(1 .. 36));
 
-                column(No_; Number) { }
+                column(Child_No; Number) { }
+            }
+
+            dataitem(Blank; Integer)
+            {
+                column(Blank_No; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    XLines := Count;
+                    SetBlankRange;
                 end;
             }
 
-            dataitem(XBlankLines; Integer)
+            dataitem(Subtotal; Integer)
             {
-                column(XBlanks; XBlanks) { }
-                column(XBlank; Number) { }
+                DataItemTableView = where(Number = filter(1 .. 2));
+
+                column(Subtotal_No; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange(Number, 1, GetBlanks);
+                    if IsEmpty then CurrReport.Break;
+                end;
+            }
+
+            dataitem(Total; Integer)
+            {
+                DataItemTableView = where(Number = filter(1 .. 4));
+
+                column(Total_No; Number) { }
+
+                trigger OnPreDataItem()
+                begin
+                    if IsEmpty then CurrReport.Break;
                 end;
             }
         }
 
-        dataitem(XSideBars; Integer)
+        dataitem(Aside; Integer)
         {
-            column(XSideBar; Number) { }
+            column(Aside_No; Number) { }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, GetSideBars);
+                SetAsideRange;
             end;
         }
     }
 
     trigger OnInitReport()
     begin
-        XLinesPerPage := 40;
-        XTotalsLines := 3;
-    end;
-
-    local procedure GetLines(): Integer
-    begin
-        exit(XLines mod XLinesPerPage);
-    end;
-
-    local procedure GetPages(): Integer
-    begin
-        exit(XLines div XLinesPerPage);
-    end;
-
-    local procedure TestRange(Range: Integer)
-    begin
-        if (Range = XLinesPerPage) and (XTotalsLines = 0) then
-            CurrReport.Break;
-    end;
-
-    local procedure TestBlanks()
-    begin
-        if XBlanks < XTotalsLines then begin
-            XBlanks += XLinesPerPage;
-            XLines += XLinesPerPage;
-        end;
-    end;
-
-    local procedure GetBlanks(): Integer
-    begin
-        XBlanks := XLinesPerPage - GetLines;
-
-        TestRange(XBlanks);
-        TestBlanks;
-
-        exit(XBlanks);
-    end;
-
-    local procedure GetSideBars(): Integer
-    begin
-        TestRange(XLines);
-
-        exit(GetPages);
+        "Report Header Lines" := 4;
+        "Lines Per Page" := 44;
     end;
 
     var
-        XLinesPerPage: Integer;
-        XTotalsLines: Integer;
-        XBlanks: Integer;
-        XLines: Integer;
+        "Lines Per Page": Integer;
+        "Report Header Lines": Integer;
+
+    local procedure CountLines(): Integer
+    begin
+        exit("Report Header Lines" + Child.Count + Subtotal.Count + Total.Count)
+    end;
+
+    local procedure CalcBlanks(): Integer
+    begin
+        exit(("Lines Per Page" - (CountLines mod "Lines Per Page")) mod "Lines Per Page");
+    end;
+
+    local procedure SetBlankRange()
+    begin
+        Blank.SetRange(Number, 1, CalcBlanks);
+
+        if Blank.IsEmpty then CurrReport.Break;
+    end;
+
+    local procedure SetAsideRange()
+    begin
+        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div "Lines Per Page");
+    end;
 }
