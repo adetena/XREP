@@ -1,30 +1,28 @@
 /// <summary>
-/// Esta  plantilla  permite personalizar informes con un diseño adaptable que mantiene
-/// las distintas secciones del cuerpo en una determinada posición del documento.
+/// This template enables report customization with a flexible layout that maintain all
+/// sections in an specific position of the document.
 /// 
-/// Cuenta  con la posibilidad de establecer una cabecera  global del informe, que solo
-/// se mostrará en la primera página, así como con una sección lateral que se repite en
-/// cada página que muestre registros.
+/// It  has  the  capability  of  setting up a global report header, which will only be
+/// displayed in the first page of the report, as well as an aside section that will be
+/// repeated in each page containing records.
 /// 
-/// La  tabla principal cuenta con secciones  de cabecera y pie, que se repiten en cáda
-/// página.
+/// The main table has header and footer sections that repeats on each page.
 /// 
-/// Cada página puede incluir tantas líneas como se definan en la configuración de este
-/// informe.  Para ello, puede personalizar el valor de la variable "Lines Per Page" en
-/// el trigger OnInitReport. En caso de que el DataSet no contenga registros suficiente
-/// para llenar la página, se generarán tantas líneas en blanco como sea necesario para
-/// hacerlo, de modo que el pie de la tabla siga alineado al final del documento.
+/// Each  page may include as many lines as defined in the report setup. To modify this
+/// value, you  can  customize  the "Lines Per Page" variable value in the OnInitReport
+/// trigger. If the dataset  has not enough rows to fill the page, blanks lines will be
+/// added until the page is complete, so the footer of the table stays at the bottom of
+/// the document.
 /// 
-/// La plantilla cuenta  con secciones de subtotales y totales, situadas entre la tabla
-/// y el pie de la misma, sin embargo, solo se mostrarán  si contienen registros. Puede 
-/// agregar registros a estas secciones  asignando las tablas necesarias a sus dataitem
-/// correspondientes, o configurando manualmente el rango de la tabla Integer.
+/// This  template  also  has  subtotals  and totals sections, located between the main
+/// table  and  the  footers. You can customize the source tables for the corresponding
+/// dataitems or set up an specific range for the default Integer table.
 /// 
-/// Es posible que desee establecer  un tamaño fijo para una de las dos secciones antes
-/// mencionadas.  Para ello puede aumentar el tamaño de la sección deseada en el diseño
-/// del informe y configurar su propiedad Hidden para  que oculte todas las filas salvo
-/// la primera.
-/// 
+/// You  may  want to use a fixed size for those sections. To achieve this, you'll need
+/// to  increase the height of the corresponding row in the layout to the desired size,
+/// as well as set up the range of the Integer table for the dataitem for that section.
+/// That  will  generate as many rows as the specified range, but you can just hide all
+/// rows except for the first one.
 /// </summary>
 report 50100 XReport
 {
@@ -35,14 +33,13 @@ report 50100 XReport
 
     dataset
     {
-        // Dataitem maestro.
+        // Master dataitem.
         //
-        // Puede  reemplazar la  tabla  Integer con la  tabla deseada  y congigurar sus
-        // propios filtros, campos y triggers.
+        // You  may  replace the Integer table with the desired one, and setup your own
+        // filters, fields and triggers.
         //
-        // Las columnas Offset y Range son necesarias para poder calcular los distintos
-        // parámetros  del informe desde el diseño del mismo. Permiten  el acceso a las
-        // variables a las que refieren desde el código incrustado.
+        // The Offset and Range columns are required  in order to enable calculation of 
+        // the required parameters for the layout from the embedded code.
         dataitem(Parent; Integer)
         {
             DataItemTableView = where(Number = const(1));
@@ -50,14 +47,13 @@ report 50100 XReport
             column(Offset; "Report Header Lines") { }
             column(Range; "Lines Per Page") { }
 
-            // Dataitem principal.
+            // Main dataitem.
             //
-            // Puede  reemplazar la tabla Integer con la tabla deseada y configurar sus
-            // propios filtros, campos y triggers.
+            // You  may  replace the Integer table with the desired one, and setup your
+            // own filters, fields and triggers.
             //
-            // La  columna Child_No es necesaria  para  calcular la  visibilidad de las
-            // líneas de este dataitem, sin embargo, puede modificar la expresión de la
-            // misma.
+            // The Child_No column is required in  order to calculate the visibility of
+            // all lines in the dataitem. You can modify it's source expression.
             dataitem(Child; Integer)
             {
                 DataItemTableView = where(Number = filter(1 .. 36));
@@ -65,13 +61,13 @@ report 50100 XReport
                 column(Child_No; Number) { }
             }
 
-            // Dataitem auxiliar.
+            // Auxiliary dataitem.
             //
-            // Este dataitem se encarga de generar las filas en blanco que se requieran
-            // hasta completar la página.
+            // This  dataitem  is responsible of generating the blank lines to complete
+            // the page.
             //
-            // La  columna Blank_No es necesaria  para  calcular la  visibilidad de las
-            // líneas de este dataitem.
+            // The Blank_No column is required in  order to calculate the visibility of
+            // all lines in the dataitem.
             dataitem(Blank; Integer)
             {
                 column(Blank_No; Number) { }
@@ -82,14 +78,13 @@ report 50100 XReport
                 end;
             }
 
-            // Dataitem de sección.
+            // Subtotal section dataitem.
             //
-            // Puede  reemplazar la tabla Integer con la tabla deseada y configurar sus
-            // propios filtros, campos y triggers.
+            // You  may  replace the Integer table with the desired one, and setup your
+            // own filters, fields and triggers.
             //
-            // La columna Subtotal_No es necesaria para calcular la  visibilidad de las
-            // líneas de este dataitem, sin embargo, puede modificar la expresión de la
-            // misma.
+            // The Subtotal_No column is required in  order to calculate the visibility
+            // of all lines in the dataitem. You can modify it's source expression.
             dataitem(Subtotal; Integer)
             {
                 DataItemTableView = where(Number = filter(1 .. 2));
@@ -103,14 +98,13 @@ report 50100 XReport
                 end;
             }
 
-            // Dataitem de sección.
+            // Total section dataitem.
             //
-            // Puede  reemplazar la tabla Integer con la tabla deseada y configurar sus
-            // propios filtros, campos y triggers.
+            // You  may  replace the Integer table with the desired one, and setup your
+            // own filters, fields and triggers.
             //
-            // La  columna  Total_No  es necesaria para calcular la  visibilidad de las
-            // líneas de este dataitem, sin embargo, puede modificar la expresión de la
-            // misma.
+            // The Total_No column is required in  order to calculate the visibility of
+            // all lines in the dataitem. You can modify it's source expression.
             dataitem(Total; Integer)
             {
                 DataItemTableView = where(Number = filter(1 .. 4));
@@ -125,13 +119,13 @@ report 50100 XReport
             }
         }
 
-        // Dataitem auxiliar.
+        // Auxiliary dataitem.
         //
-        // Este dataitem se encarga de generar las secciones laterales que se requieran
-        // en funcion del número de páginas que ocupen las líneas del informe.
+        // This  dataitem  is responsible of generating the aside sections next to each
+        // page.
         //
-        // La columna Aside_No es necesaria  para calcular la visibilidad de las líneas
-        // de este dataitem.
+        // The Aside_No column  is required in order to calculate the visibility of all
+        // lines in the dataitem. You can modify it's source expression.
         dataitem(Aside; Integer)
         {
             column(Aside_No; Number) { }
@@ -143,7 +137,7 @@ report 50100 XReport
         }
     }
 
-    // Configuración de la plantilla.
+    // Template setup.
     trigger OnInitReport()
     begin
         "Report Header Lines" := 4;
@@ -155,8 +149,7 @@ report 50100 XReport
         "Lines Per Page": Integer;
 
     /// <summary>
-    /// Cuenta  el número de  líneas total del  informe, teniendo  en cuenta  todas las
-    /// secciones necesarias.
+    /// Count the number of lines in all sections of the report.
     /// </summary>
     /// <returns>El número total de líneas del informe.</returns>
     local procedure CountLines(): Integer
@@ -165,8 +158,8 @@ report 50100 XReport
     end;
 
     /// <summary>
-    /// Calcula  el  número de lineas en  blanco a añadir  en función de los parámetros
-    /// definidos en la configuración de la plantilla.
+    /// Calculates  the  number  of blank lines to add accoring to the defined template
+    /// parameters.
     /// </summary>
     /// <returns>The number of blank lines to add.</returns>
     local procedure CalcBlanks(): Integer
@@ -175,7 +168,7 @@ report 50100 XReport
     end;
 
     /// <summary>
-    /// Establece el rango del dataitem auxiliar que genera las líneas en blanco.
+    /// Sets the range of the blank lines dataitem.
     /// </summary>
     local procedure SetBlankRange()
     begin
@@ -185,7 +178,7 @@ report 50100 XReport
     end;
 
     /// <summary>
-    /// Establece el rango del dataitem auxiliar que genera las secciones laterales.
+    /// Sets the range of the aside sections dataitem.
     /// </summary>
     local procedure SetAsideRange()
     begin
