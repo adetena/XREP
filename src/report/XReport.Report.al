@@ -1,144 +1,101 @@
-report 50101 "XReport"
+report 50100 XReport
 {
     ApplicationArea = All;
     Caption = 'XReport';
     UsageCategory = ReportsAndAnalysis;
-    DefaultLayout = RDLC;
-    RDLCLayout = 'src/report/rdl/XReport.rdl';
+    RDLCLayout = 'src/report/layout/XReport.rdl';
 
     dataset
     {
-        dataitem(Parent; Integer) // Table may be replaced with the required one
+        dataitem(Parent; Integer)
         {
-            DataItemTableView = where(Number = const(1)); // Range of the parent dataitem must be 1.
+            DataItemTableView = where(Number = const(1));
 
-            column(XLinesPerPage; XLinesPerPage) { }
-            column(XTotalsLines; XTotalsLines) { }
-            column(XLines; XLines) { }
+            column(Offset; "Report Header Lines") { }
+            column(Range; "Lines Per Page") { }
 
-            dataitem(Child; Integer) // Table may be replaced with the required one
+            dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter('1..38')); // Replace or remove for production.
+                DataItemTableView = where(Number = filter(1 .. 36));
 
-                column(No_; Number) { }
+                column(Child_No; Number) { }
+            }
+
+            dataitem(Blank; Integer)
+            {
+                column(Blank_No; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    XLines := Count; // Sets the number of data lines to the dataitem count
+                    SetBlankRange;
                 end;
             }
 
-            // Shows blank lines to fill the remaining space
-            dataitem(XBlankLines; Integer)
+            dataitem(Subtotal; Integer)
             {
-                column(XBlanks; XBlanks) { }
-                column(XBlank; Number) { }
+                DataItemTableView = where(Number = filter(1 .. 2));
+
+                column(Subtotal_No; Number) { }
 
                 trigger OnPreDataItem()
                 begin
-                    SetRange(Number, 1, GetBlanks); // Sets the blank lines range
+                    if IsEmpty then CurrReport.Break;
+                end;
+            }
+
+            dataitem(Total; Integer)
+            {
+                DataItemTableView = where(Number = filter(1 .. 4));
+
+                column(Total_No; Number) { }
+
+                trigger OnPreDataItem()
+                begin
+                    if IsEmpty then CurrReport.Break;
                 end;
             }
         }
 
-        // Shows sidebars next to each page
-        dataitem(XSideBars; Integer)
+        dataitem(Aside; Integer)
         {
-            column(XSideBar; Number) { }
+            column(Aside_No; Number) { }
 
             trigger OnPreDataItem()
             begin
-                SetRange(Number, 1, GetSideBars); // Sets the side bars range
+                SetAsideRange;
             end;
         }
     }
 
-    // Initializes XReport parameters
     trigger OnInitReport()
     begin
-        XLinesPerPage := 40;
-        XTotalsLines := 3;
-    end;
-
-    /// <summary>
-    /// Gets the spare number of lines
-    /// </summary>
-    /// <returns>The number of lines</returns>
-    local procedure GetLines(): Integer
-    begin
-        exit(XLines mod XLinesPerPage);
-    end;
-
-    /// <summary>
-    /// Gets the number of pages
-    /// </summary>
-    /// <returns></returns>
-    local procedure GetPages(): Integer
-    begin
-        exit(XLines div XLinesPerPage);
-    end;
-
-    /// <summary>
-    /// Tests the given range to check if blank lines are required
-    /// </summary>
-    /// <param name="Range">The range to test</param>
-    local procedure TestRange(Range: Integer)
-    begin
-        if (Range = XLinesPerPage) and (XTotalsLines = 0) then
-            CurrReport.Break;
-    end;
-
-    /// <summary>
-    /// Checks whether blank lines are enough to display totals, adding extra lines if not
-    /// </summary>
-    local procedure TestBlanks()
-    begin
-        if XBlanks < XTotalsLines then begin
-            XBlanks += XLinesPerPage;
-            XLines += XLinesPerPage;
-        end;
-    end;
-
-    /// <summary>
-    /// Gets the required number of blank lines to fill the remaining space
-    /// </summary>
-    /// <returns>The number of blank lines</returns>
-    local procedure GetBlanks(): Integer
-    begin
-        XBlanks := XLinesPerPage - GetLines;
-
-        TestRange(XBlanks);
-        TestBlanks;
-
-        exit(XBlanks);
-    end;
-
-    /// <summary>
-    /// Gets the required number of sidebars to show next to each page
-    /// </summary>
-    /// <returns>The number of sidebars</returns>
-    local procedure GetSideBars(): Integer
-    begin
-        TestRange(XLines);
-
-        exit(GetPages);
+        "Report Header Lines" := 4;
+        "Lines Per Page" := 44;
     end;
 
     var
-        /// <summary>
-        /// Number of lines per page
-        /// </summary>
-        XLinesPerPage: Integer;
-        /// <summary>
-        /// Number of lines for totals
-        /// </summary>
-        XTotalsLines: Integer;
-        /// <summary>
-        /// Number of blank lines
-        /// </summary>
-        XBlanks: Integer;
-        /// <summary>
-        /// Number of data lines
-        /// </summary>
-        XLines: Integer;
+        "Lines Per Page": Integer;
+        "Report Header Lines": Integer;
+
+    local procedure CountLines(): Integer
+    begin
+        exit("Report Header Lines" + Child.Count + Subtotal.Count + Total.Count)
+    end;
+
+    local procedure CalcBlanks(): Integer
+    begin
+        exit(("Lines Per Page" - (CountLines mod "Lines Per Page")) mod "Lines Per Page");
+    end;
+
+    local procedure SetBlankRange()
+    begin
+        Blank.SetRange(Number, 1, CalcBlanks);
+
+        if Blank.IsEmpty then CurrReport.Break;
+    end;
+
+    local procedure SetAsideRange()
+    begin
+        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div "Lines Per Page");
+    end;
 }
