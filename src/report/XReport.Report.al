@@ -8,8 +8,8 @@
 /// 
 /// The main table has header and footer sections that repeats on each page.
 /// 
-/// Each  page may include as many lines as defined in the report setup. To modify this
-/// value, you  can  customize  the "Lines Per Page" variable value in the OnInitReport
+/// Each  page may include  as many lines  as defined in the  template setup. To modify 
+/// this value, you  can customize the global Range variable value in the  OnInitReport 
 /// trigger. If the dataset  has not enough rows to fill the page, blanks lines will be
 /// added until the page is complete, so the footer of the table stays at the bottom of
 /// the document.
@@ -44,8 +44,8 @@ report 50100 XReport
         {
             DataItemTableView = where(Number = const(1));
 
-            column(Offset; "Report Header Lines") { }
-            column(Range; "Lines Per Page") { }
+            column(Offset; Offset) { }
+            column(Range; Range) { }
 
             // Main dataitem.
             //
@@ -93,7 +93,7 @@ report 50100 XReport
 
                 trigger OnPreDataItem()
                 begin
-                    // Evita generar filas residuales si el dataitem no contiene datos.
+                    // Prevents dataitem to render if it is empty.
                     if IsEmpty then CurrReport.Break;
                 end;
             }
@@ -113,7 +113,7 @@ report 50100 XReport
 
                 trigger OnPreDataItem()
                 begin
-                    // Evita generar filas residuales si el dataitem no contiene datos.
+                    // Prevents dataitem to render if it is empty.
                     if IsEmpty then CurrReport.Break;
                 end;
             }
@@ -140,13 +140,13 @@ report 50100 XReport
     // Template setup.
     trigger OnInitReport()
     begin
-        "Report Header Lines" := 4;
-        "Lines Per Page" := 44;
+        Offset := 4;
+        Range := 44;
     end;
 
     var
-        "Report Header Lines": Integer;
-        "Lines Per Page": Integer;
+        Offset: Integer;
+        Range: Integer;
 
     /// <summary>
     /// Count the number of lines in all sections of the report.
@@ -154,7 +154,7 @@ report 50100 XReport
     /// <returns>El número total de líneas del informe.</returns>
     local procedure CountLines(): Integer
     begin
-        exit("Report Header Lines" + Child.Count + Subtotal.Count + Total.Count)
+        exit(Offset + Child.Count + Subtotal.Count + Total.Count)
     end;
 
     /// <summary>
@@ -164,7 +164,7 @@ report 50100 XReport
     /// <returns>The number of blank lines to add.</returns>
     local procedure CalcBlanks(): Integer
     begin
-        exit(("Lines Per Page" - (CountLines mod "Lines Per Page")) mod "Lines Per Page");
+        exit((Range - (CountLines mod Range)) mod Range);
     end;
 
     /// <summary>
@@ -182,6 +182,6 @@ report 50100 XReport
     /// </summary>
     local procedure SetAsideRange()
     begin
-        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div "Lines Per Page");
+        Aside.SetRange(Number, 1, (CountLines + CalcBlanks) div Range);
     end;
 }
