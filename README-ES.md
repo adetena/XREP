@@ -11,9 +11,9 @@ La  tabla principal cuenta con secciones  de cabecera y pie, que se repiten en c
 página.
 
 Cada página puede incluir tantas líneas como se definan en la configuración de este
-informe.  Para ello, puede personalizar el valor de la variable "Lines Per Page" en
-el trigger OnInitReport. En caso de que el DataSet no contenga registros suficiente
-para llenar la página, se generarán tantas líneas en blanco como sea necesario para
+informe.  Para ello, puede personalizar el valor de la variable Range en el trigger
+OnInitReport.  En  caso  de  que  el DataSet no contenga registros suficientes para
+llenar  la  página, se  generarán  tantas  líneas en blanco como sea necesario para
 hacerlo, de modo que el pie de la tabla siga alineado al final del documento.
 
 La plantilla cuenta  con secciones de subtotales y totales, situadas entre la tabla
