@@ -42,6 +42,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
+                                  <Label>Page</Label>
                                   <Value>=Code.Page</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
@@ -58,6 +59,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
+                                  <Label>Pages</Label>
                                   <Value>=Code.Pages</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
@@ -95,6 +97,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>No</Label>
                                   <Value>=Fields!Child_No.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
@@ -130,6 +133,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>No</Label>
                                   <Value>=Fields!Blank_No.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
@@ -165,6 +169,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>No</Label>
                                   <Value>=Fields!Subtotal_No.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
@@ -200,6 +205,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>No</Label>
                                   <Value>=Fields!Total_No.Value</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
@@ -243,6 +249,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
+                                  <Label>Page</Label>
                                   <Value>=Code.Page</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
@@ -259,6 +266,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
+                                  <Label>Pages</Label>
                                   <Value>=Code.Pages</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
@@ -456,6 +464,21 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>=Fields!Aside_No.Value</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>RoyalBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value> / </Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>RoyalBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Label>Pages</Label>
+                                  <Value>=Code.Pages</Value>
                                   <Style>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>RoyalBlue</Color>

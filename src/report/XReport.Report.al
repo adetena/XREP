@@ -16,7 +16,7 @@ report 50100 XReport
 
             dataitem(Child; Integer)
             {
-                DataItemTableView = where(Number = filter(1 .. 32));
+                DataItemTableView = where(Number = filter(1 .. 36));
 
                 column(Child_No; Number) { }
             }
