@@ -394,7 +394,7 @@
             <Height>1.69in</Height>
             <Width>8.02in</Width>
             <Visibility>
-              <Hidden>=Code.Init(CountRows("DataSet_Result"), Fields!Report_Header_Lines.Value, Fields!Lines_Per_Page.Value)</Hidden>
+              <Hidden>=Code.Init(CountRows("DataSet_Result"), Fields!Offset.Value, Fields!Range.Value)</Hidden>
             </Visibility>
             <Style>
               <Border>
@@ -538,23 +538,23 @@
     </ReportSection>
   </ReportSections>
   <Code>Public Dim Page, Pages As Integer
-Private Dim Line, Rows, Offset, LinesPerPage As Integer
+Private Dim Line, Rows, Offset, Range As Integer
 
-Public Function Init(ByVal Rows, ByVal Offset, ByVal LinesPerPage) As Boolean
-    Me.Pages = (Rows + Offset) \ LinesPerPage
+Public Function Init(ByVal Rows, ByVal Offset, ByVal Range) As Boolean
+    Me.Pages = (Rows + Offset) \ Range
     Me.Line = Offset
     Me.Rows = Rows
     Me.Offset = Offset
-    Me.LinesPerPage = LinesPerPage
+    Me.Range = Range
 End Function
 
 Public Function IsHeaderHidden()
-    IsHeaderHidden = (Me.Line &lt;&gt; Me.Offset) And ((Me.Line Mod Me.LinesPerPage) &lt;&gt; 0)
+    IsHeaderHidden = (Me.Line &lt;&gt; Me.Offset) And ((Me.Line Mod Me.Range) &lt;&gt; 0)
     If Not IsHeaderHidden Then Me.Page += 1
 End Function
 
 Public Function IsFooterHidden()
-    IsFooterHidden = (Me.Line Mod Me.LinesPerPage) &lt;&gt; 0
+    IsFooterHidden = (Me.Line Mod Me.Range) &lt;&gt; 0
 End Function
 
 Public Function IsLineHidden(ByVal Line)
@@ -568,11 +568,11 @@ End Function</Code>
   <DataSets>
     <DataSet Name="DataSet_Result">
       <Fields>
-        <Field Name="Report_Header_Lines">
-          <DataField>Report_Header_Lines</DataField>
+        <Field Name="Offset">
+          <DataField>Offset</DataField>
         </Field>
-        <Field Name="Lines_Per_Page">
-          <DataField>Lines_Per_Page</DataField>
+        <Field Name="Range">
+          <DataField>Range</DataField>
         </Field>
         <Field Name="Child_No">
           <DataField>Child_No</DataField>

@@ -11,8 +11,8 @@ report 50100 XReport
         {
             DataItemTableView = where(Number = const(1));
 
-            column(Report_Header_Lines; "Report Header Lines") { }
-            column(Lines_Per_Page; "Lines Per Page") { }
+            column(Offset; "Report Header Lines") { }
+            column(Range; "Lines Per Page") { }
 
             dataitem(Child; Integer)
             {
