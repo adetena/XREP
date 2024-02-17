@@ -22,7 +22,7 @@
 /// to  increase the height of the corresponding row in the layout to the desired size,
 /// as well as set up the range of the Integer table for the dataitem for that section.
 /// That  will  generate as many rows as the specified range, but you can just hide all
-/// rows except for the first one.
+/// rows except for the first one in the layout.
 /// </summary>
 report 50100 XReport
 {
