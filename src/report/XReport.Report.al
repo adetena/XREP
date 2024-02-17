@@ -88,8 +88,8 @@ report 50100 XReport
     end;
 
     var
-        "Lines Per Page": Integer;
         "Report Header Lines": Integer;
+        "Lines Per Page": Integer;
 
     /// <summary>
     /// Counts the number of lines in the DataSet.
