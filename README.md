@@ -1,7 +1,7 @@
 <h1>XReport</h1>
 
-This template enables report customization with a flexible layout that maintain all
-sections in an specific position of the document.
+<p style="text-align=justify;">This template enables report customization with a flexible layout that maintain all
+sections in an specific position of the document.</p>
 
 It  has  the  capability  of  setting up a global report header, which will only be
 displayed in the first page of the report, as well as an aside section that will be
