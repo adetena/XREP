@@ -7,18 +7,23 @@ report 50100 XReport
 
     dataset
     {
-        dataitem(Parent; Integer)
+        dataitem(Parent; "Sales Invoice Header")
         {
-            DataItemTableView = where(Number = const(1));
+            RequestFilterFields = "No.";
 
             column(Offset; Offset) { }
             column(Range; Range) { }
 
-            dataitem(Child; Integer)
+            dataitem(Child; "Sales Invoice Line")
             {
-                DataItemTableView = where(Number = filter(1 .. 36));
+                DataItemLink = "Document No." = field("No.");
 
-                column(Child_No; Number) { }
+                column(Child_No; "No.") { IncludeCaption = true; }
+                column(Child_Description; Description) { IncludeCaption = true; }
+                column(Child_Quantity; Quantity) { IncludeCaption = true; }
+                column(Child_Line_Discount_Pct; "Line Discount %") { IncludeCaption = true; }
+                column(Child_VAT_Pct; "VAT %") { IncludeCaption = true; }
+                column(Child_Amount; Amount) { IncludeCaption = true; }
             }
 
             dataitem(Blank; Integer)
@@ -70,7 +75,7 @@ report 50100 XReport
     trigger OnInitReport()
     begin
         Offset := 4;
-        Range := 44;
+        Range := 43;
     end;
 
     var

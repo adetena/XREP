@@ -19,69 +19,331 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>8.02in</Width>
+                  <Width>7.77in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.5in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Table_Header_Textbox">
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value>TABLE HEADER </Value>
-                                  <Style>
-                                    <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>CornflowerBlue</Color>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Label>Page</Label>
-                                  <Value>=Code.Page</Value>
-                                  <Style>
-                                    <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>CornflowerBlue</Color>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Value> / </Value>
-                                  <Style>
-                                    <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>CornflowerBlue</Color>
-                                  </Style>
-                                </TextRun>
-                                <TextRun>
-                                  <Label>Pages</Label>
-                                  <Value>=Code.Pages</Value>
-                                  <Style>
-                                    <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
-                                    <Color>CornflowerBlue</Color>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
+                        <Tablix Name="Tablix6">
+                          <TablixBody>
+                            <TablixColumns>
+                              <TablixColumn>
+                                <Width>1.295in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>3.475in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                            </TablixColumns>
+                            <TablixRows>
+                              <TablixRow>
+                                <Height>0.25in</Height>
+                                <TablixCells>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Table_Header_Textbox">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>TABLE HEADER </Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                              <TextRun>
+                                                <Label>Page</Label>
+                                                <Value>=Code.Page</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                              <TextRun>
+                                                <Value> / </Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                              <TextRun>
+                                                <Label>Pages</Label>
+                                                <Value>=Code.Pages</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                      <ColSpan>6</ColSpan>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell />
+                                  <TablixCell />
+                                  <TablixCell />
+                                  <TablixCell />
+                                  <TablixCell />
+                                </TablixCells>
+                              </TablixRow>
+                              <TablixRow>
+                                <Height>0.25in</Height>
+                                <TablixCells>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox32">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>@No</Label>
+                                                <Value>=Parameters!Child_NoCaption.Value</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox32</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox33">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>@Description</Label>
+                                                <Value>=Parameters!Child_DescriptionCaption.Value</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox33</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox34">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>@Quantity</Label>
+                                                <Value>=Parameters!Child_QuantityCaption.Value</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox34</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox35">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>@Disc. %</Label>
+                                                <Value>=Parameters!Child_Line_Discount_PctCaption.Value</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox35</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox36">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>@VAT %</Label>
+                                                <Value>=Parameters!Child_VAT_PctCaption.Value</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox36</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Textbox37">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>@Amount</Label>
+                                                <Value>=Parameters!Child_AmountCaption.Value</Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Textbox37</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <BackgroundColor>RoyalBlue</BackgroundColor>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                </TablixCells>
+                              </TablixRow>
+                            </TablixRows>
+                          </TablixBody>
+                          <TablixColumnHierarchy>
+                            <TablixMembers>
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                            </TablixMembers>
+                          </TablixColumnHierarchy>
+                          <TablixRowHierarchy>
+                            <TablixMembers>
+                              <TablixMember />
+                              <TablixMember />
+                            </TablixMembers>
+                          </TablixRowHierarchy>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <BackgroundColor>RoyalBlue</BackgroundColor>
-                            <VerticalAlign>Middle</VerticalAlign>
                           </Style>
-                        </Textbox>
+                        </Tablix>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -91,32 +353,237 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Child_Textbox">
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Label>No</Label>
-                                  <Value>=Fields!Child_No.Value</Value>
-                                  <Style>
-                                    <FontWeight>Bold</FontWeight>
-                                  </Style>
-                                </TextRun>
-                              </TextRuns>
-                              <Style>
-                                <TextAlign>Center</TextAlign>
-                              </Style>
-                            </Paragraph>
-                          </Paragraphs>
+                        <Tablix Name="Tablix3">
+                          <TablixBody>
+                            <TablixColumns>
+                              <TablixColumn>
+                                <Width>1.295in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>3.475in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                              <TablixColumn>
+                                <Width>0.75in</Width>
+                              </TablixColumn>
+                            </TablixColumns>
+                            <TablixRows>
+                              <TablixRow>
+                                <Height>0.25in</Height>
+                                <TablixCells>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Child_Textbox">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Label>No</Label>
+                                                <Value>=Fields!Child_No.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Center</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Child_Description">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!Child_Description.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style />
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Child_Description</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Child_Quantity">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!Child_Quantity.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Right</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Child_Quantity</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Child_Line_Discount_Pct">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!Child_Line_Discount_Pct.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                  <Format>N2</Format>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Right</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Child_Line_Discount_Pct</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                      <rd:Selected>true</rd:Selected>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Child_VAT_Pct">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!Child_VAT_Pct.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                  <Format>N2</Format>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Right</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Child_VAT_Pct</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                      <rd:Selected>true</rd:Selected>
+                                    </CellContents>
+                                  </TablixCell>
+                                  <TablixCell>
+                                    <CellContents>
+                                      <Textbox Name="Child_Amount">
+                                        <KeepTogether>true</KeepTogether>
+                                        <Paragraphs>
+                                          <Paragraph>
+                                            <TextRuns>
+                                              <TextRun>
+                                                <Value>=Fields!Child_Amount.Value</Value>
+                                                <Style>
+                                                  <FontSize>8pt</FontSize>
+                                                  <Format>N2</Format>
+                                                </Style>
+                                              </TextRun>
+                                            </TextRuns>
+                                            <Style>
+                                              <TextAlign>Right</TextAlign>
+                                            </Style>
+                                          </Paragraph>
+                                        </Paragraphs>
+                                        <rd:DefaultName>Child_Amount</rd:DefaultName>
+                                        <Style>
+                                          <Border>
+                                            <Style>None</Style>
+                                          </Border>
+                                          <VerticalAlign>Middle</VerticalAlign>
+                                        </Style>
+                                      </Textbox>
+                                      <rd:Selected>true</rd:Selected>
+                                    </CellContents>
+                                  </TablixCell>
+                                </TablixCells>
+                              </TablixRow>
+                            </TablixRows>
+                          </TablixBody>
+                          <TablixColumnHierarchy>
+                            <TablixMembers>
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                              <TablixMember />
+                            </TablixMembers>
+                          </TablixColumnHierarchy>
+                          <TablixRowHierarchy>
+                            <TablixMembers>
+                              <TablixMember />
+                            </TablixMembers>
+                          </TablixRowHierarchy>
+                          <DataSetName>DataSet_Result</DataSetName>
                           <Style>
                             <Border>
-                              <Color>LightGrey</Color>
                               <Style>None</Style>
                             </Border>
-                            <VerticalAlign>Middle</VerticalAlign>
                           </Style>
-                        </Textbox>
+                        </Tablix>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -399,8 +866,8 @@
             </Filters>
             <Top>1in</Top>
             <Left>0.25in</Left>
-            <Height>1.69in</Height>
-            <Width>8.02in</Width>
+            <Height>1.94in</Height>
+            <Width>7.77in</Width>
             <Visibility>
               <Hidden>=Code.Init(CountRows("DataSet_Result"), Fields!Offset.Value, Fields!Range.Value)</Hidden>
             </Visibility>
@@ -432,7 +899,7 @@
             <Top>0in</Top>
             <Left>0.25in</Left>
             <Height>1in</Height>
-            <Width>8.02in</Width>
+            <Width>7.77in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -548,7 +1015,7 @@
         <Height>11.69in</Height>
         <Style />
       </Body>
-      <Width>8.27in</Width>
+      <Width>8.02in</Width>
       <Page>
         <PageHeight>11.69in</PageHeight>
         <PageWidth>8.27in</PageWidth>
@@ -560,6 +1027,100 @@
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Child_NoCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Child_NoCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Child_NoCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Child_DescriptionCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Child_DescriptionCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Child_DescriptionCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Child_QuantityCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Child_QuantityCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Child_QuantityCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Child_Line_Discount_PctCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Child_Line_Discount_PctCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Child_Line_Discount_PctCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Child_VAT_PctCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Child_VAT_PctCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Child_VAT_PctCaption</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Child_AmountCaption">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Child_AmountCaption</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Child_AmountCaption</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>1</NumberOfColumns>
+      <NumberOfRows>6</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Child_NoCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>Child_DescriptionCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>2</RowIndex>
+          <ParameterName>Child_QuantityCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Child_Line_Discount_PctCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>4</RowIndex>
+          <ParameterName>Child_VAT_PctCaption</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>5</RowIndex>
+          <ParameterName>Child_AmountCaption</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Dim Page, Pages As Integer
 Private Dim Line, Rows, Offset, Range As Integer
 
@@ -599,6 +1160,33 @@ End Function</Code>
         </Field>
         <Field Name="Child_No">
           <DataField>Child_No</DataField>
+        </Field>
+        <Field Name="Child_Description">
+          <DataField>Child_Description</DataField>
+        </Field>
+        <Field Name="Child_Quantity">
+          <DataField>Child_Quantity</DataField>
+        </Field>
+        <Field Name="Child_QuantityFormat">
+          <DataField>Child_QuantityFormat</DataField>
+        </Field>
+        <Field Name="Child_Line_Discount_Pct">
+          <DataField>Child_Line_Discount_Pct</DataField>
+        </Field>
+        <Field Name="Child_Line_Discount_PctFormat">
+          <DataField>Child_Line_Discount_PctFormat</DataField>
+        </Field>
+        <Field Name="Child_VAT_Pct">
+          <DataField>Child_VAT_Pct</DataField>
+        </Field>
+        <Field Name="Child_VAT_PctFormat">
+          <DataField>Child_VAT_PctFormat</DataField>
+        </Field>
+        <Field Name="Child_Amount">
+          <DataField>Child_Amount</DataField>
+        </Field>
+        <Field Name="Child_AmountFormat">
+          <DataField>Child_AmountFormat</DataField>
         </Field>
         <Field Name="Blank_No">
           <DataField>Blank_No</DataField>
