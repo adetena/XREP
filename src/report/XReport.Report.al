@@ -14,10 +14,10 @@ report 50100 XReport
             column(Offset; Offset) { }
             column(Range; Range) { }
 
-            column(Header_1; Setup."Header 1") { }
-            column(Header_2; Setup."Header 2") { }
-            column(Footer_2; Setup."Footer 2") { }
-            column(Footer_1; Setup."Footer 1") { }
+            column(Header_1; Localization."Header 1") { }
+            column(Header_2; Localization."Header 2") { }
+            column(Footer_2; Localization."Footer 2") { }
+            column(Footer_1; Localization."Footer 1") { }
 
             dataitem(Child; "Sales Invoice Line")
             {
@@ -70,7 +70,7 @@ report 50100 XReport
         dataitem(Aside; Integer)
         {
             column(Aside_No; Number) { }
-            column(Aside_1; Setup."Aside_1") { }
+            column(Aside_1; Localization."Aside_1") { }
 
             trigger OnPreDataItem()
             begin
@@ -85,21 +85,22 @@ report 50100 XReport
         {
             area(Content)
             {
-                field("Language Code"; Setup."Language Code")
+                field("Language Code"; Localization.Code)
                 {
-                    TableRelation = "XReport Setup";
+                    TableRelation = "XReport Localization";
                 }
             }
         }
 
         trigger OnInit()
         begin
-            Setup.FindFirst();
+            Localization.SetCurrentKey(SystemCreatedAt);
+            Localization.FindFirst();
         end;
 
         trigger OnQueryClosePage(CloseAction: Action): Boolean
         begin
-            Setup.Get(Setup."Language Code");
+            Localization.Get(Localization.Code);
         end;
     }
 
@@ -110,7 +111,7 @@ report 50100 XReport
     end;
 
     var
-        Setup: Record "XReport Setup";
+        Localization: Record "XReport Localization";
         Offset: Integer;
         Range: Integer;
 
