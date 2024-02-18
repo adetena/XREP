@@ -65,7 +65,8 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Value>TABLE HEADER </Value>
+                                                <Label>Header 2</Label>
+                                                <Value>=Fields!Header_2.Value</Value>
                                                 <Style>
                                                   <FontSize>6pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
@@ -73,7 +74,15 @@
                                                 </Style>
                                               </TextRun>
                                               <TextRun>
-                                                <Label>Page</Label>
+                                                <Value xml:space="preserve"> </Value>
+                                                <Style>
+                                                  <FontSize>6pt</FontSize>
+                                                  <FontWeight>Bold</FontWeight>
+                                                  <Color>CornflowerBlue</Color>
+                                                </Style>
+                                              </TextRun>
+                                              <TextRun>
+                                                <Label>$Page</Label>
                                                 <Value>=Code.Page</Value>
                                                 <Style>
                                                   <FontSize>6pt</FontSize>
@@ -90,7 +99,7 @@
                                                 </Style>
                                               </TextRun>
                                               <TextRun>
-                                                <Label>Pages</Label>
+                                                <Label>$Pages</Label>
                                                 <Value>=Code.Pages</Value>
                                                 <Style>
                                                   <FontSize>6pt</FontSize>
@@ -376,6 +385,7 @@
                               <TablixMember />
                             </TablixMembers>
                           </TablixRowHierarchy>
+                          <DataSetName>DataSet_Result</DataSetName>
                           <ZIndex>3</ZIndex>
                           <Style>
                             <Border>
@@ -792,7 +802,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TABLE FOOTER </Value>
+                                  <Label>Footer 2</Label>
+                                  <Value>=Fields!Footer_2.Value</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -800,7 +811,15 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Label>Page</Label>
+                                  <Value xml:space="preserve"> </Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>CornflowerBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Label>$Page</Label>
                                   <Value>=Code.Page</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
@@ -817,8 +836,16 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
-                                  <Label>Pages</Label>
+                                  <Label>$Pages</Label>
                                   <Value>=Code.Pages</Value>
+                                  <Style>
+                                    <FontSize>6pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>CornflowerBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value xml:space="preserve"> </Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -854,7 +881,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>REPORT FOOTER</Value>
+                                  <Label>Footer 1</Label>
+                                  <Value>=Fields!Footer_1.Value</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -965,7 +993,8 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>REPORT HEADER</Value>
+                    <Label>Header 1</Label>
+                    <Value>=Fields!Header_1.Value</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1011,8 +1040,26 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
+                                  <Label>Aside 1</Label>
+                                  <Value>=Fields!Aside_1.Value</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>RoyalBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
+                                  <Value xml:space="preserve"> </Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>RoyalBlue</Color>
+                                  </Style>
+                                </TextRun>
+                                <TextRun>
                                   <Value>=Fields!Aside_No.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>RoyalBlue</Color>
                                   </Style>
@@ -1020,6 +1067,7 @@
                                 <TextRun>
                                   <Value> / </Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>RoyalBlue</Color>
                                   </Style>
@@ -1028,6 +1076,7 @@
                                   <Label>Pages</Label>
                                   <Value>=Code.Pages</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Color>RoyalBlue</Color>
                                   </Style>
@@ -1253,6 +1302,18 @@ End Function</Code>
         <Field Name="Range">
           <DataField>Range</DataField>
         </Field>
+        <Field Name="Header_1">
+          <DataField>Header_1</DataField>
+        </Field>
+        <Field Name="Header_2">
+          <DataField>Header_2</DataField>
+        </Field>
+        <Field Name="Footer_2">
+          <DataField>Footer_2</DataField>
+        </Field>
+        <Field Name="Footer_1">
+          <DataField>Footer_1</DataField>
+        </Field>
         <Field Name="Child_No">
           <DataField>Child_No</DataField>
         </Field>
@@ -1300,6 +1361,9 @@ End Function</Code>
         </Field>
         <Field Name="Aside_No">
           <DataField>Aside_No</DataField>
+        </Field>
+        <Field Name="Aside_1">
+          <DataField>Aside_1</DataField>
         </Field>
       </Fields>
       <Query>
