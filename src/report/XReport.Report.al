@@ -20,6 +20,7 @@ report 50100 XReport
 
                 column(Child_No; "No.") { IncludeCaption = true; }
                 column(Child_Description; Description) { IncludeCaption = true; }
+                column(Child_Unit_Price; "Unit Price") { IncludeCaption = true; }
                 column(Child_Quantity; Quantity) { IncludeCaption = true; }
                 column(Child_Line_Discount_Pct; "Line Discount %") { IncludeCaption = true; }
                 column(Child_VAT_Pct; "VAT %") { IncludeCaption = true; }
