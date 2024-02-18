@@ -13,7 +13,7 @@ page 50101 "XReport Localization List"
         {
             repeater(General)
             {
-                field("Code"; Rec."Code") { }
+                field(Name; Rec.Name) { }
             }
         }
     }

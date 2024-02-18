@@ -70,7 +70,7 @@ report 50100 XReport
         dataitem(Aside; Integer)
         {
             column(Aside_No; Number) { }
-            column(Aside_1; Localization."Aside_1") { }
+            column(Aside_1; Localization.Aside) { }
 
             trigger OnPreDataItem()
             begin
@@ -85,7 +85,7 @@ report 50100 XReport
         {
             area(Content)
             {
-                field("Language Code"; Localization.Code)
+                field(Language; Localization.Name)
                 {
                     TableRelation = "XReport Localization";
                 }
@@ -99,8 +99,15 @@ report 50100 XReport
         end;
 
         trigger OnQueryClosePage(CloseAction: Action): Boolean
+        var
+            Language: Record "Language Selection";
         begin
-            Localization.Get(Localization.Code);
+            Localization.Get(Localization.Name);
+
+            Language.SetRange(Name, Localization.Name);
+
+            if Language.FindSet() then
+                Language(Language."Language ID");
         end;
     }
 
