@@ -38,15 +38,16 @@ report 50100 XReport
 
                 trigger OnPreDataItem()
                 begin
+                    Subtotal.SetRange("Prepayment Order No.", Parent."Order No.");
                     SetBlankRange;
                 end;
             }
 
-            dataitem(Subtotal; Integer)
+            dataitem(Subtotal; "Sales Invoice Header")
             {
-                DataItemTableView = where(Number = filter(1 .. 2));
+                DataItemLink = "Prepayment Order No." = field("Order No.");
 
-                column(Subtotal_No; Number) { }
+                column(Subtotal_No; "No.") { }
 
                 trigger OnPreDataItem()
                 begin
