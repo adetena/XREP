@@ -100,14 +100,12 @@ report 50100 XReport
 
         trigger OnQueryClosePage(CloseAction: Action): Boolean
         var
-            Language: Record "Language Selection";
+            LanguageSelection: Record "Language Selection";
         begin
             Localization.Get(Localization.Name);
-
-            Language.SetRange(Name, Localization.Name);
-
-            if Language.FindSet() then
-                Language(Language."Language ID");
+            LanguageSelection.SetRange(Name, Localization.Name);
+            if LanguageSelection.FindSet() then
+                Language(LanguageSelection."Language ID");
         end;
     }
 
@@ -135,7 +133,6 @@ report 50100 XReport
     local procedure SetBlankRange()
     begin
         Blank.SetRange(Number, 1, CalcBlanks);
-
         if Blank.IsEmpty then CurrReport.Break;
     end;
 
