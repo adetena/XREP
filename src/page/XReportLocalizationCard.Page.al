@@ -9,12 +9,18 @@ page 50100 "XReport Localization Card"
     {
         area(content)
         {
-            field(Name; Rec.Name) { TableRelation = "Language Selection".Name; }
-            field(Header_1; Rec."Header 1") { MultiLine = true; }
-            field(Footer_1; Rec."Footer 1") { MultiLine = true; }
-            field(Header_2; Rec."Header 2") { MultiLine = true; }
-            field(Footer_2; Rec."Footer 2") { MultiLine = true; }
-            field(Aside; Rec.Aside) { MultiLine = true; }
+            field(Name; Rec.Name) { TableRelation = "Language Selection"; }
+            field(Default; Rec.Default)
+            {
+
+
+            }
+            field(Report_Footer; Rec."Report Footer") { }
+            field(Page_Footer; Rec."Page Footer") { }
+            field(Aside; Rec.Aside) { }
         }
     }
+
+    var
+        XReportLocalization: Codeunit "XReport Setup";
 }

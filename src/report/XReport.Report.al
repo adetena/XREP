@@ -14,10 +14,8 @@ report 50100 XReport
             column(Offset; Offset) { }
             column(Range; Range) { }
 
-            column(Header_1; Localization."Header 1") { }
-            column(Header_2; Localization."Header 2") { }
-            column(Footer_2; Localization."Footer 2") { }
-            column(Footer_1; Localization."Footer 1") { }
+            column(Page_Footer; Localization."Page Footer") { }
+            column(Report_Footer; Localization."Report Footer") { }
 
             dataitem(Child; "Sales Invoice Line")
             {
@@ -71,7 +69,7 @@ report 50100 XReport
         dataitem(Aside; Integer)
         {
             column(Aside_No; Number) { }
-            column(Aside_1; Localization.Aside) { }
+            column(Aside_Text; Localization.Aside) { }
 
             trigger OnPreDataItem()
             begin
@@ -95,7 +93,7 @@ report 50100 XReport
 
         trigger OnInit()
         begin
-            Localization.SetCurrentKey(SystemCreatedAt);
+            Localization.SetRange(Default, true);
             Localization.FindFirst();
         end;
 

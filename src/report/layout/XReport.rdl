@@ -65,16 +65,7 @@
                                           <Paragraph>
                                             <TextRuns>
                                               <TextRun>
-                                                <Label>Header 2</Label>
-                                                <Value>=Fields!Header_2.Value</Value>
-                                                <Style>
-                                                  <FontSize>6pt</FontSize>
-                                                  <FontWeight>Bold</FontWeight>
-                                                  <Color>CornflowerBlue</Color>
-                                                </Style>
-                                              </TextRun>
-                                              <TextRun>
-                                                <Value xml:space="preserve"> </Value>
+                                                <Value>Page Header </Value>
                                                 <Style>
                                                   <FontSize>6pt</FontSize>
                                                   <FontWeight>Bold</FontWeight>
@@ -448,7 +439,7 @@
                                               </TextRun>
                                             </TextRuns>
                                             <Style>
-                                              <TextAlign>Center</TextAlign>
+                                              <TextAlign>Right</TextAlign>
                                             </Style>
                                           </Paragraph>
                                         </Paragraphs>
@@ -458,6 +449,7 @@
                                             <Style>None</Style>
                                           </Border>
                                           <VerticalAlign>Middle</VerticalAlign>
+                                          <PaddingRight>2pt</PaddingRight>
                                         </Style>
                                       </Textbox>
                                     </CellContents>
@@ -802,8 +794,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Footer 2</Label>
-                                  <Value>=Fields!Footer_2.Value</Value>
+                                  <Label>Page Footer</Label>
+                                  <Value>=Fields!Page_Footer.Value</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -881,8 +873,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Footer 1</Label>
-                                  <Value>=Fields!Footer_1.Value</Value>
+                                  <Label>Report Footer</Label>
+                                  <Value>=Fields!Report_Footer.Value</Value>
                                   <Style>
                                     <FontSize>6pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -994,7 +986,7 @@
                 <TextRuns>
                   <TextRun>
                     <Label>Header 1</Label>
-                    <Value>=Fields!Header_1.Value</Value>
+                    <Value>REPORT HEADER</Value>
                     <Style>
                       <FontSize>6pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1040,8 +1032,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Label>Aside 1</Label>
-                                  <Value>=Fields!Aside_1.Value</Value>
+                                  <Label>Aside Text</Label>
+                                  <Value>=Fields!Aside_Text.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1057,6 +1049,7 @@
                                   </Style>
                                 </TextRun>
                                 <TextRun>
+                                  <Label>Aside No</Label>
                                   <Value>=Fields!Aside_No.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
@@ -1302,17 +1295,11 @@ End Function</Code>
         <Field Name="Range">
           <DataField>Range</DataField>
         </Field>
-        <Field Name="Header_1">
-          <DataField>Header_1</DataField>
+        <Field Name="Page_Footer">
+          <DataField>Page_Footer</DataField>
         </Field>
-        <Field Name="Header_2">
-          <DataField>Header_2</DataField>
-        </Field>
-        <Field Name="Footer_2">
-          <DataField>Footer_2</DataField>
-        </Field>
-        <Field Name="Footer_1">
-          <DataField>Footer_1</DataField>
+        <Field Name="Report_Footer">
+          <DataField>Report_Footer</DataField>
         </Field>
         <Field Name="Child_No">
           <DataField>Child_No</DataField>
@@ -1362,8 +1349,8 @@ End Function</Code>
         <Field Name="Aside_No">
           <DataField>Aside_No</DataField>
         </Field>
-        <Field Name="Aside_1">
-          <DataField>Aside_1</DataField>
+        <Field Name="Aside_Text">
+          <DataField>Aside_Text</DataField>
         </Field>
       </Fields>
       <Query>

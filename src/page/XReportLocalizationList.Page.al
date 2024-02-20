@@ -14,7 +14,17 @@ page 50101 "XReport Localization List"
             repeater(General)
             {
                 field(Name; Rec.Name) { }
+                field(Default; Rec.Default)
+                {
+                    trigger OnValidate()
+                    begin
+                        XReportLocalization.SetDefault(Rec);
+                    end;
+                }
             }
         }
     }
+
+    var
+        XReportLocalization: Codeunit "XReport Setup";
 }
