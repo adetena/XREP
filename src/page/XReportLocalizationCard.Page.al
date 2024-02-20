@@ -12,8 +12,10 @@ page 50100 "XReport Localization Card"
             field(Name; Rec.Name) { TableRelation = "Language Selection"; }
             field(Default; Rec.Default)
             {
-
-
+                trigger OnValidate()
+                begin
+                    XReportLocalization.SetDefault(Rec);
+                end;
             }
             field(Report_Footer; Rec."Report Footer") { }
             field(Page_Footer; Rec."Page Footer") { }
