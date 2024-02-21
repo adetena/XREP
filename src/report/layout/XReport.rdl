@@ -784,7 +784,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.44in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -868,22 +868,23 @@
                     <TablixCell>
                       <CellContents>
                         <Textbox Name="Report_Footer_Textbox">
+                          <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
                                   <Label>Report Footer</Label>
-                                  <Value>=Fields!Report_Footer.Value</Value>
+                                  <Value>=Fields!T.Value</Value>
+                                  <MarkupType>HTML</MarkupType>
                                   <Style>
                                     <FontSize>6pt</FontSize>
-                                    <FontWeight>Bold</FontWeight>
                                     <Color>RoyalBlue</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Center</TextAlign>
+                                <TextAlign>Left</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -950,10 +951,7 @@
                     </TablixMember>
                   </TablixMembers>
                 </TablixMember>
-                <TablixMember>
-                  <KeepWithGroup>Before</KeepWithGroup>
-                  <RepeatOnNewPage>true</RepeatOnNewPage>
-                </TablixMember>
+                <TablixMember />
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
@@ -968,7 +966,7 @@
             </Filters>
             <Top>1in</Top>
             <Left>0.25in</Left>
-            <Height>1.94in</Height>
+            <Height>2.13in</Height>
             <Width>7.77in</Width>
             <Visibility>
               <Hidden>=Code.Init(CountRows("DataSet_Result"), Fields!Offset.Value, Fields!Range.Value)</Hidden>
@@ -1300,6 +1298,9 @@ End Function</Code>
         </Field>
         <Field Name="Report_Footer">
           <DataField>Report_Footer</DataField>
+        </Field>
+        <Field Name="T">
+          <DataField>T</DataField>
         </Field>
         <Field Name="Child_No">
           <DataField>Child_No</DataField>

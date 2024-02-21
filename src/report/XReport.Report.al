@@ -17,6 +17,8 @@ report 50100 XReport
             column(Page_Footer; Localization."Page Footer") { }
             column(Report_Footer; Localization."Report Footer") { }
 
+            column(T; T) { }
+
             dataitem(Child; "Sales Invoice Line")
             {
                 DataItemLink = "Document No." = field("No.");
@@ -64,6 +66,33 @@ report 50100 XReport
                     if IsEmpty then CurrReport.Break;
                 end;
             }
+
+            trigger OnAfterGetRecord()
+            var
+                XRL: Record "XReport Line";
+            begin
+                XRL.SetRange("Loc. Name", Localization.Name);
+                if XRL.FindSet() then
+                    repeat
+                        if XRL.Type = XRL.Type::Title then begin
+                            T += '<h1 style="text-align: center;">';
+                            T += XRL.Description;
+                            T += '</h1>';
+                        end;
+
+                        if XRL.Type = XRL.Type::Header then begin
+                            T += '<h2>';
+                            T += XRL.Description;
+                            T += '</h2>';
+                        end;
+
+                        if XRL.Type = XRL.Type::Description then begin
+                            T += '<p>';
+                            T += XRL.Description;
+                            T += '</p>';
+                        end;
+                    until XRL.Next() = 0;
+            end;
         }
 
         dataitem(Aside; Integer)
@@ -76,19 +105,6 @@ report 50100 XReport
                 SetAsideRange;
             end;
         }
-
-        // dataitem(TermsAndConditions; "XReport Line")
-        // {
-        //     column(Loc__Name; "Loc. Name") { }
-        //     column(Line_No; "Line No") { }
-        //     column(Type; Type) { }
-        //     column(Description; Description) { }
-
-        //     trigger OnPreDataItem()
-        //     begin
-        //         SetRange("Loc. Name", Localization.Name);
-        //     end;
-        // }
     }
 
     requestpage
@@ -131,6 +147,7 @@ report 50100 XReport
         Localization: Record "XReport Localization";
         Offset: Integer;
         Range: Integer;
+        T: Text;
 
     local procedure CountLines(): Integer
     begin
