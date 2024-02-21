@@ -76,6 +76,19 @@ report 50100 XReport
                 SetAsideRange;
             end;
         }
+
+        // dataitem(TermsAndConditions; "XReport Line")
+        // {
+        //     column(Loc__Name; "Loc. Name") { }
+        //     column(Line_No; "Line No") { }
+        //     column(Type; Type) { }
+        //     column(Description; Description) { }
+
+        //     trigger OnPreDataItem()
+        //     begin
+        //         SetRange("Loc. Name", Localization.Name);
+        //     end;
+        // }
     }
 
     requestpage
