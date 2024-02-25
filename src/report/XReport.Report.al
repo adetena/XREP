@@ -77,15 +77,6 @@ report 50100 "X Report"
                 field(TermLang; Lang) { TableRelation = "Language Selection"; }
             }
         }
-
-        trigger OnQueryClosePage(CloseAction: Action): Boolean
-        var
-            LangMgt: Codeunit "X Lang. Mgt.";
-            TermsMgt: Codeunit "X Term Mgt.";
-        begin
-            Language(LangMgt.GetID(Lang));
-            Terms := TermsMgt.Get(Enum::"Report Selection Usage"::"S.Invoice", Lang);
-        end;
     }
 
     var
@@ -98,6 +89,15 @@ report 50100 "X Report"
     begin
         Offset := 4;
         Range := 44;
+    end;
+
+    trigger OnPreReport()
+    var
+        LangMgt: Codeunit "X Lang. Mgt.";
+        TermsMgt: Codeunit "X Term Mgt.";
+    begin
+        Language(LangMgt.GetID(Lang));
+        Terms := TermsMgt.Get(Enum::"Report Selection Usage"::"S.Invoice", Lang);
     end;
 
     local procedure CountLines(): Integer
