@@ -79,8 +79,12 @@ report 50100 "X Report"
         }
 
         trigger OnQueryClosePage(CloseAction: Action): Boolean
+        var
+            LangMgt: Codeunit "X Lang. Mgt.";
+            TermsMgt: Codeunit "X Term Mgt.";
         begin
-            SetLang(Lang);
+            Language(LangMgt.GetID(Lang));
+            Terms := TermsMgt.Get(Enum::"Report Selection Usage"::"S.Invoice", Lang);
         end;
 
         var
@@ -96,49 +100,6 @@ report 50100 "X Report"
     begin
         Offset := 4;
         Range := 44;
-    end;
-
-    procedure SetLang(Lang: Text)
-    var
-        LanguageSelection: Record "Language Selection";
-        TermUsage: Record "X Term. Usage";
-        TermLine: Record "X Term. Line";
-    begin
-        LanguageSelection.Reset();
-        LanguageSelection.SetRange(Name, Lang);
-        if LanguageSelection.FindFirst() then
-            Language(LanguageSelection."Language ID");
-
-        TermUsage.Reset();
-        TermUsage.SetRange("Term. Usage", Enum::"Report Selection Usage"::"S.Invoice");
-        if TermUsage.FindFirst() then begin
-            TermLine.Reset();
-            TermLine.SetRange("Term. Code", TermUsage."Term. Code");
-            TermLine.SetRange("Term. Lang.", Lang);
-            if TermLine.FindSet() then
-                repeat
-                    case TermLine."Line Type" of
-                        "X Term. Line Type"::title:
-                            begin
-                                Terms += '<h1 style="text-align: center;">';
-                                Terms += TermLine."Line Text";
-                                Terms += '</h1>';
-                            end;
-                        "X Term. Line Type"::header:
-                            begin
-                                Terms += '<h4>';
-                                Terms += TermLine."Line Text";
-                                Terms += '</h4>';
-                            end;
-                        "X Term. Line Type"::paragraph:
-                            begin
-                                Terms += '<p>';
-                                Terms += TermLine."Line Text";
-                                Terms += '</p>';
-                            end;
-                    end;
-                until TermLine.Next() = 0;
-        end;
     end;
 
     local procedure CountLines(): Integer
