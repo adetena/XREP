@@ -137,7 +137,6 @@ report 50100 "X Report"
                                 Terms += '</p>';
                             end;
                     end;
-
                 until TermLine.Next() = 0;
         end;
     end;
