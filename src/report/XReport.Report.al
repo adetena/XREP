@@ -86,15 +86,13 @@ report 50100 "X Report"
             Language(LangMgt.GetID(Lang));
             Terms := TermsMgt.Get(Enum::"Report Selection Usage"::"S.Invoice", Lang);
         end;
-
-        var
-            Lang: Text;
     }
 
     var
         Offset: Integer;
         Range: Integer;
         Terms: Text;
+        Lang: Text;
 
     trigger OnInitReport()
     begin
