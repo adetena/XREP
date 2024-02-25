@@ -96,8 +96,10 @@ report 50100 "X Report"
         LangMgt: Codeunit "X Lang. Mgt.";
         TermsMgt: Codeunit "X Term Mgt.";
     begin
-        Language(LangMgt.GetID(Lang));
-        Terms := TermsMgt.Get(Enum::"Report Selection Usage"::"S.Invoice", Lang);
+        if StrLen(Lang) <> 0 then begin
+            Language(LangMgt.GetID(Lang));
+            Terms := TermsMgt.Get(Enum::"Report Selection Usage"::"S.Invoice", Lang);
+        end;
     end;
 
     local procedure CountLines(): Integer
